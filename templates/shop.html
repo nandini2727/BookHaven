@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+    {% block title %}<title>Book Shop</title>{% endblock title %}
+    {% block static %}
+    <link rel="stylesheet" href="{% static 'css/shop.css' %}">
+    {% endblock static %}
+   
+</head>
+    {% block body %}
+    <body>
+        <!-- Shop Section -->
+        <h1>Shop Books</h1>
+        <div class="shop-page">
+            
+    
+            <!-- Filters Section -->
+            <div class="filters">
+                <h2>Filters</h2>
+    
+                <!-- Format Filter -->
+                <div class="filter">
+                    <label>Format:</label>
+                    <select id="format-filter">
+                        <option value="all">All</option>
+                        <option value="ebook">E-Book</option>
+                        <option value="hardcopy">Hardcopy</option>
+                    </select>
+                </div>
+    
+                <!-- Category Filter -->
+                <div class="filter">
+                    <label>Categories:</label>
+                    <select id="category-filter">
+                        <option value="all">All</option>
+                        <option value="civil">Civil</option>
+                        <option value="computer">Computer Science</option>
+                        <option value="mechanical">Mechanical</option>
+                        <option value="electrical">Electrical</option>
+                    </select>
+                </div>
+    
+                <!-- Price Range Slider -->
+                <div class="filter">
+                    <label>Price Range: <span id="price-range-value">$0 - $100</span></label>
+                    <input type="range" id="price-range" min="0" max="100" value="100" step="1">
+                </div>
+    
+                <!-- Sorting -->
+                <div class="filter">
+                    <label>Sort By:</label>
+                    <select id="sort-filter">
+                        <option value="popularity">Popularity</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="newest">Newest</option>
+                    </select>
+                </div>
+            </div>
+    
+            <!-- Books Listing -->
+            <div class="books-container" id="books-container">
+                <!-- Books will be dynamically inserted here -->
+            </div>
+    
+        </div>
+        <!-- Pagination -->
+        <div class="pagination">
+            <button id="prev-btn">❮ Previous</button>
+            <span id="page-info">Page 1</span>
+            <button id="next-btn">Next ❯</button>
+        </div>
+        <!-- JavaScript -->
+        <script src="{% static "js/shop.js" %}">
+        </script>
+    </body>
+    {% endblock body %}
+</html>

@@ -1,0 +1,87 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" href={% static "css/base.css" %}>
+    <link rel="icon" type="image/x-icon" href="{% static "resources/books-64.ico" %}">
+    {% block title %}{% endblock title %}
+    {% block static %}
+    {% endblock static %}
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <i class="fa-solid fa-book-open"></i> BookHaven</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/shop">Shop</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <div class="nav-icons">
+                <li><a href="/signin"><i class="fa-solid fa-user"></i></a></li>
+                <li><a href="#"> <i class="fa-regular fa-heart"></i></a></li>
+                <li><a href="/cart"> <i class="fa-solid fa-cart-shopping"></i></i></a></li>
+            </div>
+        </ul>
+    </nav>
+
+{% block body %}
+{% endblock body %}
+<script src="https://kit.fontawesome.com/a853586d9a.js" crossorigin="anonymous"></script>
+
+
+    
+  
+<div class="footer">
+    <div class="footer-container">
+        <!-- Contact Section -->
+        <div class="footer-section">
+            <h4>Have a Questions?</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 203 Fake St. Mountain View, San Francisco, California, USA</p>
+            <p><i class="fas fa-phone"></i> +2 392 3929 210</p>
+            <p><i class="fas fa-envelope"></i> info@yourdomain.com</p>
+        </div>
+    
+        <!-- Blog Section -->
+        <div class="footer-section">
+            <h4>Useful Links</h4>
+            <ul>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Community</a></li>
+            </ul>
+        </div>
+    
+        <!-- Links Section -->
+        <div class="footer-section">
+            <h4>Menu</h4>
+            <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/shop">Shop</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    
+        <!-- Subscription Section -->
+        <div class="footer-section">
+            <h4>Subscribe Us!</h4>
+            <form>
+            <input type="email" placeholder="Enter email address">
+            <button type="submit">Subscribe</button>
+            </form>
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        </div>
+
+    <p>&copy; 2024 E-Book Store. All Rights Reserved.</p>
+</div>

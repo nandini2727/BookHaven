@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} <title>BookHaven</title> {% endblock title %}
+{% block static %}
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock static %}
+
+{% block body %}
+    <div class="header">
+        <h1>Welcome to BookHaven</h1>
+        <p>Your one-stop destination for educational e-books and resources.</p>
+    </div>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Search for books...">
+            <button>Search</button>
+        </div>
+
+        <h2>Categories</h2>
+        <div class="categories">
+            <div class="category">
+                <h2><i class="fa-solid fa-gears"></i></h2>
+                <h3>Mechanical Engineering</h3>
+                <p>Designing motion, building the future.</p>
+            </div>
+            <div class="category">
+                <h2><i class="fa-solid fa-helmet-safety"></i></h2>
+                <h3>Civil Engineering</h3>
+                <p>Constructing infrastructure for better living.</p>
+            </div>
+            <div class="category">
+                <h2><i class="fa-solid fa-lightbulb"></i></h2>
+                <h3>Electrical Engineering</h3>
+                <p>Powering the world with innovation.</p>
+            </div>
+            <div class="category">
+                <h2><i class="fa-solid fa-code"></i></h2>
+                <h3>Computer Engineering</h3>
+                <p>Building smarter tech for tomorrow.</p>
+            </div>
+            <div class="category">
+                <h2><i class="fa-solid fa-plane"></i></h2>
+                <h3>Aerospace Engineering</h3>
+                <p>Exploring skies, reaching new heights.</p>
+            </div>
+            <div class="category">
+                <h2><i class="fa-solid fa-vial"></i></h2>
+                <h3>Chemical Engineering</h3>
+                <p>Transforming materials for human progress.</p>
+            </div>
+            <div class="category">
+                <h2><i class="fa-solid fa-tablets"></i></h2>
+                <h3>Biomedical Engineering</h3>
+                <p>"Engineering solutions for healthier lives.</p>
+            </div>
+            <div class="category">
+                <h2><i class="fa-solid fa-robot"></i></h2>
+                <h3>Robotics Engineering</h3>
+                <p>"Innovating machines to mimic humans.</p>
+            </div>
+            <div class="category">
+                <h2><i class="fa-solid fa-ship"></i></h2>
+                <h3>Marine Engineering</h3>
+                <p>Engineering for oceans and beyond.</p>
+            </div>
+        </div>
+
+        <h2 id="products">Featured Products</h2>
+        <div class="carousel-container">
+            <button class="prev-btn">❮</button>
+            <div class="carousel">
+                <div class="card">
+                    <img src="https://www.bookswagon.com/productimages/images200/883/9780134692883.jpg" alt="Book 1">
+                    <h3>Learn Python the Easy Way</h3>
+                    <p>By John Doe</p>
+                    <p>$19.99</p>
+                    <button>Add +</button>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/51r8AlWZOrL._SY445_SX342_.jpg" alt="Book 2">
+                    <h3>Mastering Data Science</h3>
+                    <p>By Jane Smith</p>
+                    <p>$29.99</p>
+                    <button>Add +</button>
+                </div>
+                <div class="card">
+                    <img src="https://www.bookswagon.com/productimages/images200/883/9780134692883.jpg" alt="Book 1">
+                    <h3>Learn Python the Easy Way</h3>
+                    <p>By John Doe</p>
+                    <p>$19.99</p>
+                    <button>Add +</button>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/51r8AlWZOrL._SY445_SX342_.jpg" alt="Book 2">
+                    <h3>Mastering Data Science</h3>
+                    <p>By Jane Smith</p>
+                    <p>$29.99</p>
+                    <button>Add +</button>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/81nk0M4ORZL._SL1500_.jpg" alt="Book 3">
+                    <h3>Business Strategies for Success</h3>
+                    <p>By Michael Lee</p>
+                    <p>$24.99</p>
+                    <button>Add +</button>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/71uQ8VB99rL._SY385_.jpg" alt="Book 4">
+                    <h3>Understanding Machine Learning</h3>
+                    <p>By Alice Brown</p>
+                    <p>$34.99</p>
+                    <button>Add +</button>
+                </div>
+                <div class="card">
+                    <img src="https://www.bookswagon.com/productimages/images200/883/9780134692883.jpg" alt="Book 1">
+                    <h3>Learn Python the Easy Way</h3>
+                    <p>By John Doe</p>
+                    <p>$19.99</p>
+                    <button>Add +</button>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/51r8AlWZOrL._SY445_SX342_.jpg" alt="Book 2">
+                    <h3>Mastering Data Science</h3>
+                    <p>By Jane Smith</p>
+                    <p>$29.99</p>
+                    <button>Add +</button>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/81nk0M4ORZL._SL1500_.jpg" alt="Book 3">
+                    <h3>Basic Mechanical Engineering</h3>
+                    <p>By Michael Lee</p>
+                    <p>$24.99</p>
+                    <button>Add +</button>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/71uQ8VB99rL._SY385_.jpg" alt="Book 4">
+                    <h3>Understanding Machine Learning</h3>
+                    <p>By Alice Brown</p>
+                    <p>$34.99</p>
+                    <button>Add +</button>
+                </div>
+            </div>
+            <button class="next-btn">❯</button>
+        </div>
+    </div>
+
+
+        <!-- LATEST ARRIVALS -->
+        
+        <section class="arrivals">
+            <h2>Latest Arrivals</h2>
+            <div class="newArr">
+                
+                <div class="newArr-category">
+                    
+                    <ul class="newArr-list">
+                        <li data-description="Description 1" data-image="https://m.media-amazon.com/images/I/51r8AlWZOrL._SY445_SX342_.jpg"><a href="/">Mechanical Engineering</a></li>
+                        <li data-description="Description 2" data-image="https://m.media-amazon.com/images/I/51r8AlWZOrL._SY445_SX342_.jpg"> <a href="/">Civil Engineering</a></li>
+                        <li data-description="Description 3" data-image="https://www.bookswagon.com/productimages/images200/883/9780134692883.jpg"><a href="/">Electrical Engineering</a></li>
+                        <li data-description="Description 4" data-image="https://m.media-amazon.com/images/I/71uQ8VB99rL._SY385_.jpg"><a href="/">Aerospace Engineering</a></li>
+                        <li data-description="Description 5" data-image="https://m.media-amazon.com/images/I/51r8AlWZOrL._SY445_SX342_.jpg"><a href="/"> Robotics Engineering</a></li>
+                        <li data-description="Description 6" data-image="https://m.media-amazon.com/images/I/81nk0M4ORZL._SL1500_.jpg"><a href="/"> Chemical Engineering</a></li>
+                        <li data-description="Description 7" data-image="https://m.media-amazon.com/images/I/71uQ8VB99rL._SY385_.jpg"><a href="/">Biomedical Engineering</a></li>
+                        <li data-description="Description 8" data-image="https://m.media-amazon.com/images/I/51r8AlWZOrL._SY445_SX342_.jpg"><a href="/"> Computer Engineering</a></li>
+                        <li data-description="Description 9" data-image="https://m.media-amazon.com/images/I/81nk0M4ORZL._SL1500_.jpg"><a href="/"> Marine Engineering</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="image-display">
+                    <img id="newArr-category-img" src="https://m.media-amazon.com/images/I/51r8AlWZOrL._SY445_SX342_.jpg" alt="Category">
+                </div>
+
+                <div class="Description">
+                    <p id="image-description">Description of Book</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- MILESTONES -->
+        <div class="milestones-section">
+            <div class="milestone">
+                <div class="milestone-number">1</div>
+                <div class="milestone-content">
+                    <h3>Milestone Title 1</h3>
+                    <p>Description of milestone 1.</p>
+                </div>
+            </div>
+            <div class="milestone">
+                <div class="milestone-number">2</div>
+                <div class="milestone-content">
+                    <h3>Milestone Title 2</h3>
+                    <p>Description of milestone 2.</p>
+                </div>
+            </div>
+            <div class="milestone">
+                <div class="milestone-number">3</div>
+                <div class="milestone-content">
+                    <h3>Milestone Title 3</h3>
+                    <p>Description of milestone 3.</p>
+                </div>
+            </div>
+            <div class="milestone">
+                <div class="milestone-number">4</div>
+                <div class="milestone-content">
+                    <h3>Milestone Title 4</h3>
+                    <p>Description of milestone 4.</p>
+                </div>
+            </div>
+        </div>
+
+    <script src="{% static 'js/home.js' %}"> </script>
+
+</body>
+{% endblock body %}
+</html>

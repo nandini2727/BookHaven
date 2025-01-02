@@ -1,0 +1,31 @@
+# Python bytecode and cache files
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+
+myenv/
+
+# Django secret keys and configuration files
+*.env
+
+# Database file (if you're using SQLite)
+db.sqlite3
+
+
+
+# Migrations (optional, only if you don't want them version-controlled)
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# Logs
+*.log
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

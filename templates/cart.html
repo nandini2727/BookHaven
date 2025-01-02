@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} <title>Cart</title> {% endblock title %}
+{% block static %}
+        <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock static %}
+
+{% block body %}
+    <div class="cart-container">
+        <!-- Product Table -->
+        <div class="cart-items">
+            <h1>Your Cart</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-table-body">
+                    <tr>
+                        <td> <img src="https://via.placeholder.com/60" alt="Product 1"></td>
+                        <td>Product 1</td>
+                        <td class="price">$20.00</td>
+                        <td class="quantity">
+                            <button class="decrease">-</button>
+                            <input type="number" value="1" min="1" readonly>
+                            <button class="increase">+</button>
+                        </td>
+                        <td class="total">$20.00</td>
+                        <td ><button class="delete"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td> <img src="https://via.placeholder.com/60" alt="Product 2"></td>
+                        <td>Product 2</td>
+                        <td class="price">$30.00</td>
+                        <td class="quantity">
+                            <button class="decrease">-</button>
+                            <input type="number" value="1" min="1" readonly>
+                            <button class="increase">+</button>
+                        </td>
+                        <td class="total">$30.00</td>
+                        <td ><button class="delete"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="continue-shopping" >Continue Shopping</button>
+        </div>
+        
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="summary-item">
+                <p>Subtotal:</p>
+                <p id="subtotal">$50.00</p>
+            </div>
+            <div class="summary-item">
+                <p>Tax (10%):</p>
+                <p id="tax">$5.00</p>
+            </div>
+            <div class="summary-item">
+                <p>Discount:</p>
+                <p id="discount">$0.00</p>
+            </div>
+            <div class="summary-total">
+                <p>Total:</p>
+                <p id="final-total">$55.00</p>
+            </div>
+            <p>By placing your order, you agree to be bound by the BookHaven <a href="#"> Terms of Service </a> and <a href='#'>Privacy Policy</a>.</p>
+            <div class="promo-code">
+                <h3>Add Promo or Gift Card</h3>
+                <input type="text" id="promo-code-input" placeholder="Promo code or Gift Card">
+                <button id="apply-promo">Apply</button>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+       
+    </div>
+    <script src="{% static "js/cart.js" %}"></script>
+{% endblock body %}

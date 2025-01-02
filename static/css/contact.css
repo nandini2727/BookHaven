@@ -1,0 +1,235 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif
+    /* font-family: "Montserrat", serif; */
+}
+
+/* body {
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+} */
+
+
+
+/* -----------------------------------------Hoverable Section */
+.hover-section {
+    position: relative;
+    height: 500px;
+    background: url('https://cdn.pixabay.com/photo/2016/02/16/21/07/christmas-background-1204029_1280.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* filter: blur(2px);
+    -webkit-filter: blur(1px); */
+}
+.hover-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dimmed overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease-in-out;
+}
+.hover-container:hover {
+    background: rgba(0, 0, 0, 0.8); /* Darker overlay on hover */
+}
+.hover-text {
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.hover-text p{
+    font-size: medium;
+    font-weight: 400;
+    margin-top: 15px;
+    text-align: center ;
+}
+.hover-text p a {
+    text-decoration: none;
+    color: white;
+}
+.hover-container:hover .hover-text {
+    opacity: 1;
+}
+
+
+
+
+/*----------------------------------CONTENT SECTION */
+.content-section {
+    display: flex;
+    justify-content: space-around;
+    flex: 1 1 calc(25% - 20px);
+    text-align: center;
+    align-items: center;
+    background: #fff;
+    /* border: 1px solid #ddd; */
+    border-radius: 18px;
+    /* box-shadow: 0px 4px 60px #331da21a; */
+    transition: transform 0.3s ease; 
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+}
+.contact-header p {
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: lighter;
+    color: #fff;
+}
+
+.contact-item {
+    flex: 1 1 calc(25% - 20px);
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 50px 20px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 20px;
+    box-shadow: 60px 40px 80px #331da21a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 150px; 
+    max-width: 300px;
+}
+.contact-item:hover {
+    transform: translateY(-10px);
+    background: #4ba04e;
+    /* box-shadow: inset 50px 4px 100px #fff;  */
+    box-shadow: 0 16px 12px rgba(0, 0, 0, 0.15);
+}
+.contact-item i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+.contact-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.contact-item p {
+    font-size: 1em;
+    color: #555;
+}
+.contact-item:hover h3 {
+    color: #fff;
+}
+.contact-item:hover i {
+    color: #cefcce;
+}
+.contact-item:hover p{
+    color: #b9fab9;
+}
+
+
+
+
+/* ----------------------------------- Form Group */
+.form-section{
+    display: flex;
+    background: linear-gradient(135deg, #96cd71, #4caf50); 
+    padding: 0;
+    box-shadow: inset 10px 14px 10px rgba(59, 118, 46, 0.5); 
+}
+
+.img-contact {
+    width: 40%; 
+    height: auto; 
+    /* object-fit:contain; */
+    margin-top:50px;
+    margin-left: 120px;
+}
+
+/* --------------------------------------------------- Contact Form Container */
+.contact-form-container {
+    background-color: #ffffff;
+    /* background: url('https://i.ibb.co/jwdBj98/bg-image.jpg')no-repeat; */
+    padding: 50px 100px;       
+    border-radius: 10px;
+    box-shadow: 0px 30px 26px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    margin-top: auto;
+    margin-right: 70px;
+    margin-left: auto;
+    margin-bottom: auto;
+}
+
+.contact-form-container:hover {
+    /* transform: translateY(-5px); Lift effect on hover */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); 
+}
+
+.contact-form-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+    letter-spacing: 1px; 
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+    border: 2px solid #ccc;
+    transition: border-color 0.3s, box-shadow 0.3s; 
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: #56ae5b;
+    outline: none;
+    box-shadow: 0 0 10px #47a24c;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #666;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #47a24c;
+    transform: scale(1.05);
+}
+
+
+
