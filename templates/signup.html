@@ -8,19 +8,26 @@
         <img class="img-contact" src="static/resources/signup.svg" alt="signup-removebg-preview" border="0">
         <div class="login-box">   
             <h2>Sign-Up to <span class="title">BookHaven</span></h2>
-            <form id="loginForm">
+            <form id="signupForm" method='POST' action='{% url "signup" %}'>
+                {% csrf_token %}
                 <label for="fname">First Name</label>
                 <input type="text" id="fname" name="fname" required>
+
                 <label for="lname">Last Name</label>
                 <input type="text" id="lname" name="lname" required>
+
+                <label for="lname">Username</label>
+                <input type="text" id="username" name="username" required>
 
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email" required>
 
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <label for="password1">Password</label>
+                <input type="password" id="password1" name="password1" required>
 
-                <button type="button" id="signupButton">Sign-Up</button>
+                <label for="password2">Confirm Password</label>
+                <input type="password" id="password2" name="password2" required>
+                <button type="submit" id="signupButton">Sign-Up</button>
             </form>
             <p>By continuing, you agree to BookHaven's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.</p>
             <hr>

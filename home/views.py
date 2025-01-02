@@ -14,6 +14,7 @@ def signin(request):
     return render(request, "signin.html")
 
 def signup(request):
+    print('this is signup')
     return render(request, "signup.html")
 
 def contact(request):

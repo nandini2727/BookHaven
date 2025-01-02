@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = [
+    'accounts.backends.EmailOrUsernameBackend',  # Custom backend
+    'django.contrib.auth.backends.ModelBackend', # Default backend
+]
+
 
 # Application definition
 
@@ -38,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home'
+    'home',
+    'accounts',
 ]
 
 MIDDLEWARE = [
