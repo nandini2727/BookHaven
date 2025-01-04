@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+    {% block title %}<title>Book Shop</title>{% endblock title %}
+    {% block static %}
+    <link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+    {% endblock static %}
+   
+</head>
+    {% block body %}
+    <body>
+
+        <div class="container">
+            <div class="search-bar" id="search-bar">
+                <input type="text" placeholder="Search for books...">
+                <button>Search</button>
+            </div>
+    
+        </div>
+
+
+    <div class="wishlist-container">
+        <h1>My Wishlist</h1>
+        <p id="product-count">There are {{ wishlist_items|length }} products in this wishlist.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Product</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in wishlist_items %}
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <img src="{{ item.image_url }}" alt="{{ item.name }}">
+                        <span>{{ item.name }}</span>
+                    </td>
+                    <td>${{ item.price }}</td>
+                    <td>
+                        {% if item.in_stock %}
+                        <span class="status in-stock">In Stock</span>
+                        {% else %}
+                        <span class="status out-of-stock">Out of Stock</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.in_stock %}
+                        <button class="action-btn add-to-cart">Add to cart</button>
+                        {% else %}
+                        <button class="action-btn contact-us">Contact us</button>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button class="remove-btn">🗑️</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        
+        <button class="action-btn add-to-cart" data-product-id="{{ item.id }}">Add to cart</button>
+        <div class="buy-now">
+            <button class="buy-now-btn">Buy Now</button>
+        </div>
+    </div>
+
+    <script src="{% static 'js/wishlist.js' %}"></script>
+        
+
+    </body>
+    {% endblock body %}
+</html>

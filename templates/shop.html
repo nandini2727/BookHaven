@@ -60,6 +60,22 @@
             <!-- Books Listing -->
             <div class="books-container" id="books-container">
                 <!-- Books will be dynamically inserted here -->
+                
+                    {% for book in books %}
+                    <div class="book-card">
+                        
+                            <img src="{{book.cover_image.url}}" alt="{{book.title}}">
+                            <h3>{{ book.title }}</h3>
+                            <p>Author: {{ book.author }}</p>
+                            <p>Category: {{ book.category.name }}</p>
+                            <p>Price: ₹{{ book.price }}</p>
+                            <p>Popularity: {{ book.popularity }}</p>
+                            <p>Added on: {{ book.created_at }}</p>
+                    
+                        
+                    </div>
+                    {% endfor %}
+               
             </div>
     
         </div>
@@ -70,8 +86,8 @@
             <button id="next-btn">Next ❯</button>
         </div>
         <!-- JavaScript -->
-        <script src="{% static "js/shop.js" %}">
-        </script>
+        {% comment %} <script src="{% static "js/shop.js" %}">
+        </script> {% endcomment %}
     </body>
     {% endblock body %}
 </html>

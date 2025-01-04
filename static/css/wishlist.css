@@ -1,0 +1,157 @@
+body {
+    font-family: "Montserrat", serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* SEARCH BAR */
+.search-bar {
+    text-align: center;
+    margin: 20px 0 40px;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 60%;
+    border: 1px solid #868585;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.search-bar button:hover {
+    background-color: #45a049;
+
+}
+
+h1{
+        text-align: left;
+        margin-bottom: 10px;
+        color: 000;
+        font-size:x-large;
+}
+
+/* -------------WISHLIST CONTAINER------------------ */
+.wishlist-container {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead {
+    background-color: #f0f0f0;
+}
+
+thead th {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+}
+
+tbody tr {
+    border-bottom: 1px solid #eee;
+}
+
+tbody td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.in-stock {
+    background-color: #d4f4d2;
+    color: #3c763d;
+}
+
+.out-of-stock {
+    background-color: #f9dcdc;
+    color: #a94442;
+}
+
+.action-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-to-cart,
+.contact-us {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.add-to-cart:hover,
+.contact-us:hover {
+    background-color: #218838;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #ff4d4d;
+}
+
+.remove-btn:hover {
+    color: #e60000;
+}
+
+.buy-now {
+    text-align: right;
+}
+
+.buy-now button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.buy-now button:hover {
+    background-color: #218838;
+}
