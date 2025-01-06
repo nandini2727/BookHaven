@@ -22,7 +22,10 @@ def signup(request):
 
         user = User.objects.create_user(first_name=first_name,last_name=last_name,username=username, email=email, password=password1)
         user.save()
+        user.backend = 'django.contrib.auth.backends.ModelBackend' 
+        login(request, user)
         messages.success(request, "Account created successfully!")
+        messages.success(request, "Login successful!")
         return redirect('/')
 
     return render(request, 'signup.html')

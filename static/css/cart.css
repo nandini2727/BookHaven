@@ -15,7 +15,7 @@ body {
 .cart-container {
     display: flex;
     gap: 20px;
-    max-width: 80vw;
+    max-width: 90vw;
     margin: 100px auto;
 }
 
@@ -68,10 +68,14 @@ table th {
     font-weight: bold;
     font-size: medium;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .continue-shopping:hover {
     background-color: #218838; /* Darker shade on hover */
+}
+.quantity{
+    width:160px
 }
 
 .quantity button {
@@ -90,7 +94,7 @@ table th {
     border: 1px solid #ccc;
     /* margin: 0 5px; */
     border-radius: 5px ;
-    padding: 5px;
+    padding: 5px 0px;
 }
 
 .quantity button:hover {
@@ -168,7 +172,6 @@ table th {
     width: 100%;
     padding: 15px;
     background-color: #28a745;
-    color: white;
     font-weight: bold;
     font-size: larger;
     border: none;
@@ -176,7 +179,9 @@ table th {
     cursor: pointer;
     margin-top: 20px;
 }
-
+.checkout-btn a{
+    color: white;
+}
 .checkout-btn:hover {
     background-color: #218838;
 }

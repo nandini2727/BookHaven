@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -19,8 +20,19 @@ class Book(models.Model):
     stock = models.PositiveIntegerField(default=0)
     popularity = models.PositiveIntegerField(default=0)  # Number of times bought
     created_at = models.DateTimeField(default=now)  # Timestamp for sorting by newest
-    ebook_file = models.FileField(upload_to='ebooks/', blank=True, null=True)
-    cover_image = models.ImageField(upload_to='book_covers/', blank=True, null=True)
+    rating = models.DecimalField(max_digits=3, decimal_places=1, default=0.0) 
+    cover_image =  models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.title
+    
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="wishlists")
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="wishlist_items")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'book')  # A user can only wishlist a book once
+
+    def __str__(self):
+        return f"{self.user.username}'s wishlist - {self.book.name}"

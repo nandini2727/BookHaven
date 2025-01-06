@@ -6,78 +6,79 @@
 {% endblock static %}
 
 {% block body %}
-    <div class="cart-container">
-        <!-- Product Table -->
-        <div class="cart-items">
-            <h1>Your Cart</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody id="cart-table-body">
-                    <tr>
-                        <td> <img src="https://via.placeholder.com/60" alt="Product 1"></td>
-                        <td>Product 1</td>
-                        <td class="price">$20.00</td>
-                        <td class="quantity">
-                            <button class="decrease">-</button>
-                            <input type="number" value="1" min="1" readonly>
-                            <button class="increase">+</button>
-                        </td>
-                        <td class="total">$20.00</td>
-                        <td ><button class="delete"><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td> <img src="https://via.placeholder.com/60" alt="Product 2"></td>
-                        <td>Product 2</td>
-                        <td class="price">$30.00</td>
-                        <td class="quantity">
-                            <button class="decrease">-</button>
-                            <input type="number" value="1" min="1" readonly>
-                            <button class="increase">+</button>
-                        </td>
-                        <td class="total">$30.00</td>
-                        <td ><button class="delete"><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button class="continue-shopping" >Continue Shopping</button>
-        </div>
-        
-        <!-- Order Summary -->
-        <div class="order-summary">
-            <h2>Order Summary</h2>
-            <div class="summary-item">
-                <p>Subtotal:</p>
-                <p id="subtotal">$50.00</p>
-            </div>
-            <div class="summary-item">
-                <p>Tax (10%):</p>
-                <p id="tax">$5.00</p>
-            </div>
-            <div class="summary-item">
-                <p>Discount:</p>
-                <p id="discount">$0.00</p>
-            </div>
-            <div class="summary-total">
-                <p>Total:</p>
-                <p id="final-total">$55.00</p>
-            </div>
-            <p>By placing your order, you agree to be bound by the BookHaven <a href="#"> Terms of Service </a> and <a href='#'>Privacy Policy</a>.</p>
-            <div class="promo-code">
-                <h3>Add Promo or Gift Card</h3>
-                <input type="text" id="promo-code-input" placeholder="Promo code or Gift Card">
-                <button id="apply-promo">Apply</button>
-            </div>
-            <button class="checkout-btn">Checkout</button>
-        </div>
-       
+<div class="cart-container">
+    <!-- Product Table -->
+    <div class="cart-items">
+        <h1>Your Cart</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="cart-table-body">
+                {% for item in cart.items.all %}
+                <tr>
+                    <td><img src="{{ item.book.cover_image }}" alt="{{ item.book.title }}" style="width: 60px; height: auto;"></td>
+                    <td>{{ item.book.title }}</td>
+                    <td class="price">${{ item.book.price }}</td>
+                    <td class="quantity">
+                        <form method="post" action="{% url 'update_cart' item.book.id %}">
+                            {% csrf_token %}
+                            <button type="submit" name="quantity" value="{{ item.quantity|add:-1 }}" class="decrease">-</button>
+                            <input type="number" name="show_quantity" value="{{ item.quantity}}" min="0" readonly>
+                            <button type="submit" name="quantity" value="{{ item.quantity|add:1 }}" class="increase">+</button>
+                        </form>
+                    </td>
+                    <td class="total">${{ item.total_price }}</td>
+                    <td>
+                        <form method="post" action="{% url 'remove_from_cart' item.book.id %}">
+                            {% csrf_token %}
+                            <button class="delete"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">Your cart is empty!</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'home' %}" class="continue-shopping">Continue Shopping</a>
     </div>
-    <script src="{% static "js/cart.js" %}"></script>
-{% endblock body %}
+
+    <!-- Order Summary -->
+    <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-item">
+            <p>Subtotal:</p>
+            <p id="subtotal">${{ cart.total_price }}</p>
+        </div>
+        <div class="summary-item">
+            <p>Tax (10%):</p>
+            <p id="tax">${{ tax|floatformat:2 }}</p> 
+        </div>
+        <div class="summary-item">
+            <p>Discount:</p>
+            <p id="discount">$0.00</p>
+        </div>
+        <div class="summary-total">
+            <p>Total:</p>
+            <p id="final-total">${{ total|floatformat:2 }}</p> 
+        </div>
+        <p>By placing your order, you agree to be bound by the BookHaven <a href="#"> Terms of Service </a> and <a href='#'>Privacy Policy</a>.</p>
+        <div class="promo-code">
+            <h3>Add Promo or Gift Card</h3>
+            <input type="text" id="promo-code-input" placeholder="Promo code or Gift Card">
+            <button id="apply-promo">Apply</button>
+        </div>
+        <button class="checkout-btn"><a href="/">Checkout</a></button>
+    </div>
+</div>
+{% endblock %}
