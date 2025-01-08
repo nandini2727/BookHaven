@@ -6,6 +6,5 @@ urlpatterns=[
     path('signin',views.signin,name='signin'),
     path('signup',views.signup,name='signup'),
     path('contact',views.contact,name='contact'),
-    # path('cart',views.cart,name='cart'),
-    # path('wishlist',views.wishlist,name='wishlist'),
+    path('product/<int:book_id>/',views.product,name="product") 
 ]

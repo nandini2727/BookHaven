@@ -1,15 +1,30 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.template import loader
 from books.models import *
 from .models import Contact
+from django.db.models import Q
 
 def home(request):
-    return render(request,"home.html")
-    # template=loader.get_template('home.html')
-    # return HttpResponse(template.render())
+    categories = Category.objects.all()
+    featured_books = []
+    latest_arrival=[]
+    for category in categories:
+        book = Book.objects.filter(category=category).order_by('popularity').first()  # Get the first book in the category
+        latest_book=Book.objects.filter(category=category).order_by('-created_at').first()
+        if book:
+            featured_books.append(book)
+        if latest_book:
+            latest_arrival.append(latest_book)
+    context={
+        "categories":categories,
+        "featured_books":featured_books,
+        "latest_arrival":latest_arrival
+        }
+    return render(request,"home.html",context)
+
 
 def contact(request):
     if request.method == 'POST':
@@ -24,55 +39,70 @@ def contact(request):
             message=message
         ) 
         messages.success(request, "Your message has been sent successfully!")
-        return redirect('contact')  # Replace 'contact' with the name of your URL pattern
+        return redirect('contact')  
 
     return render(request, "contact.html")
            
 
 def shop(request):
-    categories = Category.objects.all()
+    query = request.GET.get('q', '')  # Get the search query from the GET parameters
+    if query:
+        # Filter books by name or author (case-insensitive match)
+        books = Book.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
+    else:
+        # If no query, show all books
+        books = Book.objects.all()
 
-    # Get the selected filters from GET request
-    selected_category = request.GET.get('category', None)
-    selected_format = request.GET.get('format', 'all')
-    price_range = request.GET.get('price', 100000)
-    sort_by = request.GET.get('sort_by', 'popularity')
-    books = Book.objects.all()
-    # Filter by format
-    # if selected_format != 'all':
-    #     books = Book.objects.filter(format=selected_format)  # Assuming 'format' is a field in your model
-    # else:
-    #     books = Book.objects.all()
+    category_filter = request.GET.get('category', 'all')
+    format_filter = request.GET.get('format')
+    sort_filter = request.GET.get('sort', '')
+    price_max = request.GET.get('price_max', None)
+    rating_filter = request.GET.getlist('ratings')
 
-    # Filter by category
-    if selected_category:
-        books = books.filter(category__id=selected_category)
+    # Apply filters
+    if category_filter != 'all':
+        books = books.filter(category__name=category_filter)
 
-    # Filter by price range
-    books = books.filter(price__lte=price_range)
+    if format_filter == 'ebook':
+        books = books.filter(is_ebook=True)
+    elif format_filter == 'hardcopy':
+        books = books.filter(is_hardcopy=True)
 
-    # Sorting logic
-    if sort_by == 'price-low':
-        books = books.order_by('price')
-    elif sort_by == 'price-high':
-        books = books.order_by('-price')
-    elif sort_by == 'newest':
-        books = books.order_by('-created_at')
-    else:  # Default sort by popularity
+    if price_max:
+        books = books.filter(price__lte=price_max)
+
+    if rating_filter:
+        books = books.filter(rating__in=rating_filter)
+
+    # Apply sorting
+    if sort_filter == 'popularity':
         books = books.order_by('-popularity')
+    elif sort_filter == 'price-low':
+        books = books.order_by('price')
+    elif sort_filter == 'price-high':
+        books = books.order_by('-price')
+    elif sort_filter == 'newest':
+        books = books.order_by('-created_at')
 
-    paginator = Paginator(books, 12)  # Show 10 books per page
+    # Pagination
+    paginator = Paginator(books, 9)  
     page_number = request.GET.get('page',1)
     page_obj = paginator.get_page(page_number)
+
+    # Get categories for the filter section
+    categories = Category.objects.all()
+
     context = {
         'books': page_obj,
         'categories': categories,
-        'selected_category': selected_category,
-        # 'selected_format': selected_format,
-        'price_range': price_range,
-        'sort_by': sort_by,
+        'applied_filters': {
+            'category': category_filter,
+            'format': format_filter,
+            'sort': sort_filter,
+            'price_max': price_max,
+            'ratings': rating_filter,
+        },
     }
-
     return render(request, 'shop.html', context)
 
 def signin(request):
@@ -81,11 +111,8 @@ def signin(request):
 def signup(request):
     return render(request, "signup.html")
 
+def product(request,book_id):
+    book = get_object_or_404(Book, id= book_id)
 
-# def cart(request):
-#     return render(request, "cart.html")
-
-# def wishlist(request):
-#     return render(request, "wishlist.html")
-# def contact(request):
-#     return render(request, "contact.html")
+    # Pass the book to the template for rendering
+    return render(request, 'product.html', {'book': book})

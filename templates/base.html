@@ -23,10 +23,12 @@
             <li><a href="/contact">Contact</a></li>
             <div class="nav-icons">
                 <li id="user-icon"><i  class="fa-solid fa-user"></i></li>
-                <li><a href="/books/wishlist"> <i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="/cart/cart"> <i class="fa-solid fa-cart-shopping"></i></i></a></li>
+                <li><a href="/books/wishlist"> <i class="fa-regular fa-heart"></i><span id="wishlist-count">{{ wishlist_count }}</span></a></li>
+                <li><a href="/cart/cart"> <i class="fa-solid fa-cart-shopping"></i><span id="cart-count">{{ cart_count }}</span></i></a></li>
             </div>
         </ul>
+    </nav>
+        {% block content %}
         <div class="user-dialog" id="user-dialog">
             {% if user.is_authenticated %}
                 <p>Hello, {{ user.first_name }}</p>
@@ -35,7 +37,14 @@
                 <a href="{% url 'signin' %}" id="login-btn">Login</a>
             {% endif %}
         </div>
-    </nav>
+        <div class="search-bar">
+            <form method="get" action="{% url 'shop' %}">
+                <input type="text" name="q" placeholder="Search for books..." value="{{ request.GET.q|default:'' }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        {% endblock content %}
+    
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -76,7 +85,7 @@
             <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/shop">Shop</a></li>
-            <li><a href="/cart">Cart</a></li>
+            <li><a href="/cart/cart">Cart</a></li>
             <li><a href="/contact">Contact</a></li>
             </ul>
         </div>

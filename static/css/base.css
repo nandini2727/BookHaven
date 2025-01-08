@@ -87,6 +87,37 @@ body {
   color:#333;
   padding: 0px;
 }
+.nav-icons span{
+  font-size: small;
+  margin:4px 2px;
+}
+.search-bar {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 40%;
+    border: 1px solid #868585;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.search-bar button:hover {
+    background-color: #45a049;
+
+}
 
 .footer {
     text-align: center;

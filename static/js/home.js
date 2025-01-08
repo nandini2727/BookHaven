@@ -45,9 +45,5 @@ document.querySelectorAll('.newArr-list li').forEach(item => {
         document.getElementById('image-description').textContent = description;
     });
 
-    // Optional: Clear the description when not hovering
-    item.addEventListener('mouseout', function() {
-        document.getElementById('image-description').textContent = "Hover over a category to see the description.";
-    });
 });
 

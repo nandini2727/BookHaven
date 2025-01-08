@@ -13,103 +13,116 @@
         <div class="shop-page">
             <!-- Filters Section -->
             <div class="filters">
-                <h2>Filters</h2>
+                <h2>Categories</h2>
+                <select id="category-filter">
+                    <option value="all" {% if applied_filters.category == "all" %}selected{% endif %}>All</option>
+                    {% for category in categories %}
+                    <option value="{{ category.name }}" {% if applied_filters.category == category.name %}selected{% endif %}>
+                        {{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                
+
+                <label class="price-filter">Price Range: <span id="price-range-value">&#8377;0 - {{ applied_filters.price_max|default:"300000" }}</span></label>
+                <input type="range" id="price-range" min="0" max="300000" value="{{ applied_filters.price_max|default:"300000" }}" step="1">
         
-                <!-- Format Filter -->
-                {% comment %} <div class="filter">
-                    <label>Format:</label>
-                    <select id="format-filter" onchange="this.form.submit()">
-                        <option value="all" {% if selected_format == 'all' %}selected{% endif %}>All</option>
-                        <option value="ebook" {% if selected_format == 'ebook' %}selected{% endif %}>E-Book</option>
-                        <option value="hardcopy" {% if selected_format == 'hardcopy' %}selected{% endif %}>Hardcopy</option>
-                    </select>
-                </div> {% endcomment %}
-        
-                <!-- Category Filter -->
-                <form method="get" action="{% url 'shop' %}" id="category-filter-form">
-                    <label for="category">Filter by Category:</label>
-                    <select name="category" id="category" onchange="this.form.submit()">
-                        <option value="">All Categories</option>
-                        {% for category in categories %}
-                            <option value="{{ category.id }}" {% if category.id == selected_category %}selected{% endif %}>
-                                {{ category.name }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </form>
-        
-                <!-- Price Range Slider -->
-                <div class="filter">
-                    <label>Price Range: <span id="price-range-value">${{ price_range }}</span></label>
-                    <input type="range" id="price-range" name="price" min="0" max="100000" value="{{ price_range }}" step="1" onchange="updatePriceValue()">
-                </div>
-        
-                <!-- Sorting -->
-                <div class="filter">
-                    <label>Sort By:</label>
-                    <select id="sort-filter" onchange="this.form.submit()">
-                        <option value="popularity" {% if sort_by == 'popularity' %}selected{% endif %}>Popularity</option>
-                        <option value="price-low" {% if sort_by == 'price-low' %}selected{% endif %}>Price: Low to High</option>
-                        <option value="price-high" {% if sort_by == 'price-high' %}selected{% endif %}>Price: High to Low</option>
-                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Newest</option>
-                    </select>
+                <div class="rating-filter">
+                    <h3>Rating</h3>
+                    <ul class="ratings">
+                        <li>
+                            <input type="checkbox" value="5" 
+                                   {% if 5|stringformat:"d" in applied_filters.ratings %}checked{% endif %}>
+                                   <label for="5-stars" class="stars">★★★★★</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="4" 
+                                   {% if 4|stringformat:"d" in applied_filters.ratings %}checked{% endif %}>
+                                   <label for="4-stars" class="stars">★★★★☆</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="3" 
+                                   {% if 3|stringformat:"d" in applied_filters.ratings %}checked{% endif %}>
+                                   <label for="3-stars" class="stars">★★★☆☆</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="2" 
+                                   {% if 2|stringformat:"d" in applied_filters.ratings %}checked{% endif %}>
+                                   <label for="2-stars" class="stars">★★☆☆☆</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="1" 
+                                   {% if 1|stringformat:"d" in applied_filters.ratings %}checked{% endif %}>
+                                   <label for="1-stars" class="stars">★☆☆☆☆</label>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        
-            <!-- Books Listing -->
-            <div class="books-container" id="books-container">
-                {% for book in books %}
-                <div class="book-card">
-                    <img src="{{ book.cover_image }}" alt="{{ book.title }}" loading="eager">
-                    <h3>{{ book.title }}</h3>
-                    <p>Author: {{ book.author }}</p>
-                    <p>Category: {{ book.category.name }}</p>
-                    <p>Price: ₹{{ book.price }}</p>
-                    <p>Popularity: {{ book.popularity }}</p>
-                    <p>Added on: {{ book.created_at }}</p>
-                    {% if book.stock == 0 %}
-                         <p class="out-of-stock" >Out Of Stock</p>
-                    {% else %}
-                        <button class="add-to-cart" data-book-id="{{ book.id }}"><a href="{% url 'add_to_cart' book.id %}" >Add to Cart</a></button>
-                    {% endif %}
-                    <button class="wishlist" ><a href="{% url 'add_to_wishlist' book.id %}" >Wishlist</a></button>
+            <div class="books-section">
+                <div class="title" id="title">
+                    <p>Books</p>
                 </div>
-                {% endfor %}
+                <div class="sort-by">
+                    <div class="format-filter">
+                        <!-- Format Filter -->
+                        <select id="format-filter">
+                                <option value="" disabled selected>Format</option>
+                                <option value="all" {% if applied_filters.format == "all" %}selected{% endif %}>All</option>
+                                <option value="ebook" {% if applied_filters.format == "ebook" %}selected{% endif %}>E-Book</option>
+                                <option value="hardcopy" {% if applied_filters.format == "hardcopy" %}selected{% endif %}>Hardcopy</option>
+                        </select>
+                    </div>
+
+                    <div class="sort-filter">
+                        <!-- SORT BY FILTER -->
+                        <select id="sort-filter">
+                            <option value="" disabled selected>Sort By</option>
+                            <option value="popularity" {% if applied_filters.sort == "popularity" %}selected{% endif %}>Popularity</option>
+                            <option value="price-low" {% if applied_filters.sort == "price-low" %}selected{% endif %}>Price: Low to High</option>
+                            <option value="price-high" {% if applied_filters.sort == "price-high" %}selected{% endif %}>Price: High to Low</option>
+                            <option value="newest" {% if applied_filters.sort == "newest" %}selected{% endif %}>Newest</option> 
+                        </select>
+                    </div>
+                </div>
+                <!-- Books Listing -->
+                <div class="books-container" id="books-container">
+                    {% for book in books %}
+                    <div class="book-card">
+                        <a href='{% url "product" book.id %}'>
+                            <img src="{{ book.cover_image }}" alt="{{ book.title }}" loading="eager">
+                            <h3>{{ book.title }}</h3>
+                            <p>{{ book.author }}</p>
+                            <p>{{ book.category.name }}</p>
+                            <p><span class="stars">★ </span>{{book.rating}} rating</p> 
+                            <p> ₹{{ book.price }}</p>
+                        </a>
+                            {% if book.stock == 0 %}
+                                <p class="out-of-stock" >Out Of Stock</p>
+                            {% else %}
+                            <a href="{% url 'add_to_cart' book.id %}" ><button class="add-to-cart" data-book-id="{{ book.id }}">Add to Cart</button></a>
+                            {% endif %}
+                            <a href="{% url 'add_to_wishlist' book.id %}" ><button class="wishlist" >Wishlist</button></a>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-        
         </div>
         
         <!-- Pagination -->
         <div class="pagination">
-            <span>Page {{ books.number }} of {{ books.paginator.num_pages }}</span>
             {% if books.has_previous %}
-            <button class="prev-btn" onclick="window.location='?page={{ books.previous_page_number }}'">❮ Previous</button>
+                <a href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ books.previous_page_number }}"><button class="prev-btn">❮ Previous</button></a>
             {% else %}
                 <button class="prev-btn" disabled>❮ Previous</button>
             {% endif %}
-                {% if books.has_next %}
-                <button class="next-btn" onclick="window.location='?page={{ books.next_page_number }}'">Next ❯</button>
+            <span>Page {{ books.number }} of {{ books.paginator.num_pages }}</span>
+            {% if books.has_next %}
+            <a href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ books.next_page_number }}"><button class="next-btn">Next ❯</button></a>
             {% else %}
                 <button class="next-btn" disabled>Next ❯</button>
             {% endif %}
         </div> 
-        
-        <script>
-            // Update price range display
-            function updatePriceValue() {
-                const priceRange = document.getElementById('price-range').value;
-                document.getElementById('price-range-value').textContent = 'Rs.' + priceRange;
-                document.getElementById('category-filter-form').submit();
-            }
-        
-            // Add to cart button functionality (basic demo)
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', function() {
-                    const bookId = this.getAttribute('data-book-id');
-                    alert('Book with ID ' + bookId + ' added to the cart!');
-                    // You can handle cart functionality here using JavaScript and Django's session or a cart model
-                });
-            });
+    </div>
+        <script src="{% static "js/shop.js" %}">            
         </script>        
     </body>
     {% endblock body %}

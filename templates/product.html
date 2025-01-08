@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+    {% block title %}<title>Buy {{book.title}}</title>{% endblock title %}
+    {% block static %}
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    {% endblock static %}
+   
+</head>
+    {% block body %}
+    <body>
+        <div class="path">
+            <a href="/">Home</a> / <a href="/shop">Shop</a> / <span> {{book.title}}</span>
+        </div>
+        <main>
+            <div class="product-page">
+                <div class="product-images">
+                    <img id="main-image" src="{{book.cover_image}}" alt="{{book.title}}">
+                </div>
+                <div class="product-details">
+                    <h4> {{book.category.name}} </h4>
+                    <h1> {{book.title}}</h1>
+
+                    <div class="product-rating">
+                        <span>⭐ {{book.rating}} rating</span> (4 reviews)
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price"> &#8377;{{book.price|apply_discount:10}}</span>
+                        <span class="original-price">&#8377;{{book.price}}</span>
+                        <span class="discount">10%</span>
+                    </div>
+                    <hr>
+                    
+                    <div class="addToCart">
+
+                        <!-- Weight options -->
+                        <div class="weight-options">
+                            <button class="weight-btn active" data-weight="E-Book">E-Book</button>
+                            <button class="weight-btn" data-weight="Hardcover">Hardcover</button>
+                        </div>
+                    
+                        <!-- Quantity selector -->
+                        <div class="quantity-selector">
+                            <button class="qty-btn decrease">-</button>
+                            <input type="text" class="qty-input" value="1" readonly>
+                            <button class="qty-btn increase">+</button>
+                        </div>
+                    
+                        <!-- Action buttons -->
+                        <div class="cart-actions">
+                            {% if book.stock %}
+                               <button class="add-to-cart-btn"><a href="{% url 'add_to_cart' book.id %}" >Add to cart</a></button>
+                            {% else %}
+                                <button class="out-of-stock">Out Of Stock</button>
+                            {% endif %}
+                            
+                            <button class="action-btn"><a href="{% url 'add_to_wishlist' book.id %}" ><i class="fa fa-heart"></i></a></button>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="product-meta">
+                        <ul>
+                            <li><strong>ISBN Code:</strong> {{book.isbn}}</li>
+                            <li><strong>Availability:</strong> {% if book.stock %}In Stock {% else %} Out Of Stock{% endif %}</li>
+                            <li><strong>Author:</strong> {{book.author}}</li>
+                            <li><strong>Shipping:</strong> 01 day shipping. (<span class="highlight">Free pickup today</span>)</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </main>
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('product-details')">Product Details</button>
+                <button class="tab-button" onclick="showTab('information')">Information</button>
+                <button class="tab-button" onclick="showTab('reviews')">Reviews</button>
+            </div>
+
+            <div id="product-details" class="tab-content active">
+                <h2>{{book.title}}</h2>
+                <p>{{book.description}}</p>
+            </div>
+
+            <div id="information" class="tab-content">
+                <h2>Details</h2>
+                <div class="details-grid">
+                    <div><strong>ASIN:</strong> SB0025UJ75W</div>
+                    <div><strong>Author:</strong> {{book.author}}</div>
+                    <div><strong>Date First Available:</strong> {{book.created_at}}</div>
+                    <div><strong>Language:</strong> English</div>
+                    <div><strong>Item Weight:</strong> 500g</div>
+                </div>
+            </div>
+
+            <div id="reviews" class="tab-content">
+                <h2>Reviews</h2>
+                <p>This section contains customer reviews...</p>
+            </div>
+
+            <div id="seller-info" class="tab-content">
+                <h2>Seller Info</h2>
+                <p>This section contains information about the seller...</p>
+            </div>
+        </div>
+
+    <script src={% static "js/product.js" %}></script>
+    </body>
+{% endblock body %}

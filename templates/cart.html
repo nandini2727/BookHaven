@@ -26,7 +26,7 @@
                 <tr>
                     <td><img src="{{ item.book.cover_image }}" alt="{{ item.book.title }}" style="width: 60px; height: auto;"></td>
                     <td>{{ item.book.title }}</td>
-                    <td class="price">${{ item.book.price }}</td>
+                    <td class="price">₹{{ item.book.price }}</td>
                     <td class="quantity">
                         <form method="post" action="{% url 'update_cart' item.book.id %}">
                             {% csrf_token %}
@@ -35,7 +35,7 @@
                             <button type="submit" name="quantity" value="{{ item.quantity|add:1 }}" class="increase">+</button>
                         </form>
                     </td>
-                    <td class="total">${{ item.total_price }}</td>
+                    <td class="total">₹{{ item.total_price }}</td>
                     <td>
                         <form method="post" action="{% url 'remove_from_cart' item.book.id %}">
                             {% csrf_token %}
@@ -58,19 +58,19 @@
         <h2>Order Summary</h2>
         <div class="summary-item">
             <p>Subtotal:</p>
-            <p id="subtotal">${{ cart.total_price }}</p>
+            <p id="subtotal">₹{{ cart.total_price }}</p>
         </div>
         <div class="summary-item">
             <p>Tax (10%):</p>
-            <p id="tax">${{ tax|floatformat:2 }}</p> 
+            <p id="tax">₹{{ tax|floatformat:2 }}</p> 
         </div>
         <div class="summary-item">
             <p>Discount:</p>
-            <p id="discount">$0.00</p>
+            <p id="discount">₹0.00</p>
         </div>
         <div class="summary-total">
             <p>Total:</p>
-            <p id="final-total">${{ total|floatformat:2 }}</p> 
+            <p id="final-total">₹{{ total|floatformat:2 }}</p> 
         </div>
         <p>By placing your order, you agree to be bound by the BookHaven <a href="#"> Terms of Service </a> and <a href='#'>Privacy Policy</a>.</p>
         <div class="promo-code">

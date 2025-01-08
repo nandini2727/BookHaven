@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from books.models import Book  # Assuming you have a Book model in your books app
+from books.models import Book  
 
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cart")

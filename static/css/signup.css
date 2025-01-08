@@ -29,7 +29,7 @@ h2 {
     color: #333;
 }
 
-form {
+.login-box form {
     display: flex;
     flex-direction: column;
     gap: 10px;
