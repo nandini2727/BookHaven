@@ -65,8 +65,13 @@
             <p id="tax">₹{{ tax|floatformat:2 }}</p> 
         </div>
         <div class="summary-item">
+            {% if discount > 0 %}
+                 <p>Discount ({{ coupon_code }})</p>
+                 <p id="discount">₹-{{ discount|floatformat:'2' }}</p>
+            {% else %}
             <p>Discount:</p>
             <p id="discount">₹0.00</p>
+            {% endif %}
         </div>
         <div class="summary-total">
             <p>Total:</p>
@@ -81,4 +86,5 @@
         <button class="checkout-btn"><a href="/">Checkout</a></button>
     </div>
 </div>
-{% endblock %}
+<script src="{% static 'js/cart.js' %}"> </script>
+{% endblock body%}

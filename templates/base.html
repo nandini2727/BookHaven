@@ -14,11 +14,25 @@
 <body>
     <nav class="navbar">
         <div class="logo">
-            <a href="#">
+            <a href="/">
                 <i class="fa-solid fa-book-open"></i> BookHaven</a>
         </div>
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
+            {% block content %}
+            <!-- Search box -->
+            <li>
+                <div class="searchBox"> 
+                    <form method="get" action="{% url 'shop' %}">
+                        <input type="text" name="q" placeholder="Search for books..." value="{{ request.GET.q|default:'' }}">
+                        <button type="submit">
+                        <i class="fa-solid fa-magnifying-glass fa-lg searchBtn"></i>
+                    </button>
+                    </form>
+                <!-- <i class="fa-solid fa-xmark closeBtn" id="closeBtn"></i> -->
+            </div>
+            <i class="fa-solid fa-magnifying-glass fa-lg searchBtn" id="searchIcon"></i>
+            </li>
+            {% endblock content %}
             <li><a href="/shop">Shop</a></li>
             <li><a href="/contact">Contact</a></li>
             <div class="nav-icons">
@@ -28,7 +42,6 @@
             </div>
         </ul>
     </nav>
-        {% block content %}
         <div class="user-dialog" id="user-dialog">
             {% if user.is_authenticated %}
                 <p>Hello, {{ user.first_name }}</p>
@@ -37,13 +50,13 @@
                 <a href="{% url 'signin' %}" id="login-btn">Login</a>
             {% endif %}
         </div>
-        <div class="search-bar">
+        {% comment %} <div class="search-bar">
             <form method="get" action="{% url 'shop' %}">
                 <input type="text" name="q" placeholder="Search for books..." value="{{ request.GET.q|default:'' }}">
                 <button type="submit">Search</button>
             </form>
-        </div>
-        {% endblock content %}
+        </div> {% endcomment %}
+        
     
     {% if messages %}
     <ul class="messages">
@@ -107,4 +120,5 @@
         </div>
 
     <p>&copy; 2024 E-Book Store. All Rights Reserved.</p>
+
 </div>

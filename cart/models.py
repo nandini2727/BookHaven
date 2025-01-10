@@ -23,3 +23,14 @@ class CartItem(models.Model):
 
     def total_price(self):
         return self.book.price * self.quantity  # Assuming your Book model has a `price` field
+
+
+class Coupon(models.Model):
+    code = models.CharField(max_length=50, unique=True)
+    discount = models.DecimalField(max_digits=5, decimal_places=2)  # e.g., 10.00 for 10% discount
+    valid_from = models.DateTimeField()
+    valid_to = models.DateTimeField()
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.code

@@ -17,7 +17,7 @@ class Command(BaseCommand):
             params = {
                 "q": category_name,
                 "printType": "books",
-                "maxResults": 7,
+                "maxResults": 10,
                 "key": API_KEY,
             }
 

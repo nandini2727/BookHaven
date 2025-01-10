@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load filters %}
     {% block title %}<title>Book Shop</title>{% endblock title %}
     {% block static %}
     <link rel="stylesheet" href="{% static 'css/shop.css' %}">
@@ -23,7 +24,7 @@
                 </select>
                 
 
-                <label class="price-filter">Price Range: <span id="price-range-value">&#8377;0 - {{ applied_filters.price_max|default:"300000" }}</span></label>
+                <label class="price-filter">Price Range: <span id="price-range-value">&#8377;0 - {{ applied_filters.price_max|default:"300000"|format_inr }}</span></label>
                 <input type="range" id="price-range" min="0" max="300000" value="{{ applied_filters.price_max|default:"300000" }}" step="1">
         
                 <div class="rating-filter">
@@ -68,7 +69,7 @@
                                 <option value="" disabled selected>Format</option>
                                 <option value="all" {% if applied_filters.format == "all" %}selected{% endif %}>All</option>
                                 <option value="ebook" {% if applied_filters.format == "ebook" %}selected{% endif %}>E-Book</option>
-                                <option value="hardcopy" {% if applied_filters.format == "hardcopy" %}selected{% endif %}>Hardcopy</option>
+                                <option value="hardcopy" {% if applied_filters.format == "hardcopy" %}selected{% endif %}>HardCover</option>
                         </select>
                     </div>
 

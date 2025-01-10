@@ -1,58 +1,44 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const cartTableBody = document.getElementById('cart-table-body');
-    const subtotalElement = document.getElementById('subtotal');
-    const taxElement = document.getElementById('tax');
-    const discountElement = document.getElementById('discount');
-    const finalTotalElement = document.getElementById('final-total');
-    const promoCodeInput = document.getElementById('promo-code-input');
-    const applyPromoButton = document.getElementById('apply-promo');
+// Get CSRF token from the cookie
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Check if this cookie string begins with the name we want
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
-    let discount = 0;
+const csrftoken = getCookie('csrftoken');
 
-    function updateTotals() {
-        let subtotal = 0;
+document.getElementById('apply-promo').addEventListener('click', function() {
+    const promoCode = document.getElementById('promo-code-input').value;
 
-        cartTableBody.querySelectorAll('tr').forEach((row) => {
-            const price = parseFloat(row.querySelector('.price').innerText.replace('$', ''));
-            const quantity = parseInt(row.querySelector('input').value);
-            const total = price * quantity;
-
-            row.querySelector('.total').innerText = `$${total.toFixed(2)}`;
-            subtotal += total;
-        });
-
-        const tax = subtotal * 0.10; // 10% tax
-        const finalTotal = subtotal + tax - discount;
-
-        subtotalElement.innerText = `$${subtotal.toFixed(2)}`;
-        taxElement.innerText = `$${tax.toFixed(2)}`;
-        discountElement.innerText = `$${discount.toFixed(2)}`;
-        finalTotalElement.innerText = `$${finalTotal.toFixed(2)}`;
+    if (promoCode.trim() === "") {
+        alert("Please enter a promo code.");
+        return;
     }
 
-    cartTableBody.addEventListener('click', (e) => {
-        const button = e.target;
-        if (button.classList.contains('increase') || button.classList.contains('decrease')) {
-            const quantityInput = button.closest('.quantity').querySelector('input');
-            let quantity = parseInt(quantityInput.value);
-
-            if (button.classList.contains('increase')) quantity++;
-            if (button.classList.contains('decrease') && quantity > 1) quantity--;
-
-            quantityInput.value = quantity;
-            updateTotals();
+    fetch('/cart/apply-coupon/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken  // Django CSRF token for security
+        },
+        body: JSON.stringify({ promo_code: promoCode })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);  // Show success or error message
+        if (data.success) {
+            window.location.reload();  // Reload the page to update the cart total
         }
-    });
-
-    applyPromoButton.addEventListener('click', () => {
-        const promoCode = promoCodeInput.value.trim().toUpperCase();
-        if (promoCode === 'DISCOUNT10') {
-            discount = 10;
-        } else {
-            discount = 0;
-        }
-        updateTotals();
-    });
-
-    updateTotals();
+    })
+    .catch(error => console.error('Error:', error));
 });

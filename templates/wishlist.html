@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-    {% block title %}<title>Book Shop</title>{% endblock title %}
+    {% block title %}<title>Wishlist</title>{% endblock title %}
     {% block static %}
     <link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
     {% endblock static %}
@@ -33,7 +33,7 @@
                         <img src="{{ item.book.cover_image }}" alt="{{ item.book.name }}">
                         <span>{{ item.book.name }}</span>
                     </td>
-                    <td>${{ item.book.price }}</td>
+                    <td>₹{{ item.book.price }}</td>
                     <td>
                         {% if item.book.stock > 0 %}
                         <span class="status in-stock">In Stock</span>
