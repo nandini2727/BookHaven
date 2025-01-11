@@ -7,10 +7,10 @@
 } */
 
 h1{
-        text-align: left;
+        text-align: center;
         margin-bottom: 10px;
         color: 000;
-        font-size:x-large;
+        font-size:1.8rem;
 }
 
 /* -------------WISHLIST CONTAINER------------------ */
@@ -23,10 +23,10 @@ h1{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-p {
+#product-count {
     font-size: 14px;
     color: #666;
-    margin-bottom: 20px;
+    margin: 20px ;
 }
 
 table {
@@ -43,6 +43,8 @@ thead th {
     text-align: left;
     padding: 10px;
     border-bottom: 2px solid #ddd;
+    text-align: center;
+    
 }
 
 tbody tr {
@@ -51,12 +53,17 @@ tbody tr {
 
 tbody td {
     padding: 10px;
+    text-align: center;
+    width: 0px;
     vertical-align: middle;
 }
-
+td a{
+    text-decoration: none;
+    color: #000;
+}
 img {
-    width: 50px;
-    height: 70px;
+    width: 70px;
+    height: 90px;
     object-fit: cover;
     margin-right: 10px;
 }

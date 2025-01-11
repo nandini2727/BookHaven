@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
         item.addEventListener("mouseover", () => {
             const imageName = item.getAttribute("data-image");
             imageDisplay.src = imageName;
+            categoryItems.forEach((el)=>el.classList.remove("active"))
+            item.classList.add("active");
         });
     });
 });

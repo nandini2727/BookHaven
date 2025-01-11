@@ -24,8 +24,8 @@
                 </select>
                 
 
-                <label class="price-filter">Price Range: <span id="price-range-value">&#8377;0 - {{ applied_filters.price_max|default:"300000"|format_inr }}</span></label>
-                <input type="range" id="price-range" min="0" max="300000" value="{{ applied_filters.price_max|default:"300000" }}" step="1">
+                <label class="price-filter">Price Range: <span id="price-range-value">&#8377;0 - {{ applied_filters.price_max|default:"200000"|format_inr }}</span></label>
+                <input type="range" id="price-range" min="0" max="200000" value="{{ applied_filters.price_max|default:"200000" }}" step="1">
         
                 <div class="rating-filter">
                     <h3>Rating</h3>
@@ -90,7 +90,7 @@
                     <div class="book-card">
                         <a href='{% url "product" book.id %}'>
                             <img src="{{ book.cover_image }}" alt="{{ book.title }}" loading="eager">
-                            <h3>{{ book.title }}</h3>
+                            <div>{{ book.title }}</div>
                             <p>{{ book.author }}</p>
                             <p>{{ book.category.name }}</p>
                             <p><span class="stars">★ </span>{{book.rating}} rating</p> 
@@ -103,7 +103,10 @@
                             {% endif %}
                             <a href="{% url 'add_to_wishlist' book.id %}" ><button class="wishlist" >Wishlist</button></a>
                     </div>
+                    {% empty %}
+                    <p class="no-books">No books found....</p>
                     {% endfor %}
+                    
                 </div>
             </div>
         </div>

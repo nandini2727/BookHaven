@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load filters %}
 {% block title %} <title>Cart</title> {% endblock title %}
 {% block static %}
         <link rel="stylesheet" href="{% static 'css/cart.css' %}">
@@ -24,8 +25,8 @@
             <tbody id="cart-table-body">
                 {% for item in cart.items.all %}
                 <tr>
-                    <td><img src="{{ item.book.cover_image }}" alt="{{ item.book.title }}" style="width: 60px; height: auto;"></td>
-                    <td>{{ item.book.title }}</td>
+                    <td><a href={% url "product" item.book.id %}><img src="{{ item.book.cover_image }}" alt="{{ item.book.title }}" style="width: 60px; height: auto;"></a></td>
+                    <td><a href={% url "product" item.book.id %}>{{ item.book.title }}</a></td>
                     <td class="price">₹{{ item.book.price }}</td>
                     <td class="quantity">
                         <form method="post" action="{% url 'update_cart' item.book.id %}">
@@ -85,6 +86,24 @@
         </div>
         <button class="checkout-btn"><a href="/">Checkout</a></button>
     </div>
+</div>
+<h2 id="products">Recommended Books</h2>
+<div class="carousel-container">
+    <button class="prev-btn">❮</button>
+    <div class="carousel">
+        {% for book in  recommended_books%}
+            <div class="card">
+                <a href={% url "product" book.id%}>
+                <img src="{{book.cover_image}}" alt="Book 1">
+                <div>{{book.title}}</div>
+                <p>{{ book.author|first_author }}</p>
+                <p>₹{{book.price}}</p>
+                </a>
+                <a href={% url "add_to_cart" book.id %}><button>Add +</button></a>
+            </div>
+        {% endfor %}
+    </div>
+    <button class="next-btn">❯</button>
 </div>
 <script src="{% static 'js/cart.js' %}"> </script>
 {% endblock body%}

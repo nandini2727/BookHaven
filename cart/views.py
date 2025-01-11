@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.utils.timezone import now
 from .models import Coupon
 import json
+from .utils import recommend_books
 
 
 @login_required(login_url="signin")
@@ -15,8 +16,6 @@ def cart_view(request):
     total_price = cart.total_price() 
     tax = total_price * Decimal(0.10)  # Calculate 10% tax
     total = total_price + tax  # Total = Subtotal + Tax
-
-
     # Coupon logic
     coupon_id = request.session.get('coupon_id')  # Check if a coupon is applied
     discount = Decimal(0)  # Default discount is 0
@@ -36,6 +35,9 @@ def cart_view(request):
     # Apply discount and calculate the final total
     total_price_after_discount = total_price - discount
     total = total_price_after_discount + tax  # Total = (Subtotal - Discount) + Tax
+
+    #recommeded books
+    recommended_books = recommend_books(cart)
     context = {
         'cart': cart,
         'tax': tax,
@@ -43,6 +45,7 @@ def cart_view(request):
         'discount': discount,  # Discount amount
         'total': total,  # Final total after discount and tax
         'coupon_code': coupon_code,  # Applied coupon code (if any)
+        'recommended_books': recommended_books
     }
     return render(request, 'cart.html', context)
 

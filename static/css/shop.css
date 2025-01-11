@@ -1,6 +1,6 @@
 /* General Styling */
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
@@ -123,9 +123,11 @@ gap: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
+    transition: transform 0.1s ease-in-out;
 }
 .book-card:hover{
     border: 2px solid #4CAF50;
+    transform: scale(1.03);
 }
 .book-card a{
     text-decoration: none;
@@ -137,10 +139,15 @@ gap: 10px;
     margin-bottom: 10px;
 }
 
-.book-card h3 {
+.book-card div {
     margin: 10px 0;
     font-size: 1.2rem;
     color:#242424;
+    display: -webkit-box;              
+    -webkit-box-orient: vertical;     
+    -webkit-line-clamp: 4;            
+    overflow: hidden;                 
+    text-overflow: ellipsis; 
 }
 
 .book-card p {
@@ -192,6 +199,11 @@ gap: 10px;
 
 button:hover {
     opacity: 0.9;
+}
+
+.no-books{
+    color: #666;
+    font-size: 2rem;
 }
 
 /* Pagination Styling */
