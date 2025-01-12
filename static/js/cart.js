@@ -66,4 +66,12 @@ prevBtn.addEventListener('click', () => {
     }
     carousel.style.transform = `translateX(${scrollPosition}px)`;
 });
+setInterval(()=>{
+    scrollPosition -= cardWidth;
+    if (Math.abs(scrollPosition) >= cardWidth * (totalCards-3)) {
+        scrollPosition = 0; // Reset to the start
+    }
+    carousel.style.transform = `translateX(${scrollPosition}px)`;
+
+},2500)
 

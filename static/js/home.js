@@ -21,16 +21,26 @@ prevBtn.addEventListener('click', () => {
     }
     carousel.style.transform = `translateX(${scrollPosition}px)`;
 });
+setInterval(()=>{
+    scrollPosition -= cardWidth;
+    if (Math.abs(scrollPosition) >= cardWidth * (totalCards-3)) {
+        scrollPosition = 0; // Reset to the start
+    }
+    carousel.style.transform = `translateX(${scrollPosition}px)`;
 
+},2500)
 
 document.addEventListener("DOMContentLoaded", () => {
     const categoryItems = document.querySelectorAll(".newArr-category li");
     const imageDisplay = document.getElementById("newArr-category-img");
+    const booklink=document.getElementById("newArr-category-link")
 
     categoryItems.forEach(item => {
         item.addEventListener("mouseover", () => {
             const imageName = item.getAttribute("data-image");
+            const bookName=item.getAttribute("data-book");
             imageDisplay.src = imageName;
+            booklink.href=`/product/${bookName}/`;
             categoryItems.forEach((el)=>el.classList.remove("active"))
             item.classList.add("active");
         });

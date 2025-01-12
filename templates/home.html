@@ -125,13 +125,13 @@
                     
                     <ul class="newArr-list">
                         {% for book in latest_arrival %}
-                            <li data-description="{{book.description}}" data-image="{{book.cover_image}}" {% if forloop.first  %}class="active"{% endif %} ><a href="{% url "shop" %}?category={{book.category.name}}">{{book.category.name}}</a></li>
+                            <li data-description="{{book.description}}" data-image="{{book.cover_image}}" data-book="{{book.id}}" {% if forloop.first  %}class="active"{% endif %} ><a href="{% url "shop" %}?category={{book.category.name}}">{{book.category.name}}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
 
                 <div class="image-display">
-                    <img id="newArr-category-img" src="{{latest_arrival.0.cover_image}}" alt="Category">
+                    <a id="newArr-category-link" href="{% url "product" latest_arrival.0.id %}"><img id="newArr-category-img" src="{{latest_arrival.0.cover_image}}" alt="Category"></a>
                 </div>
 
                 <div class="Description">

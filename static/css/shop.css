@@ -12,10 +12,16 @@ h1, h2 {
 
 
 
-
 .filter {
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
+.filters h2{
+    color: #5e5e5e;
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 15px 0px;
+}
+
 /* RATING STARS ------------------*/
 .rating-filter ul {
     list-style: none;
@@ -40,7 +46,9 @@ h1, h2 {
 .rating-filter label{
     font-size: large;
 }
-
+.rating-filter h3{
+    color: #242424;
+}
   .title{
     font-size: 24px;
     font-weight: bold;
@@ -66,14 +74,15 @@ h1, h2 {
 .filters {
     background-color: #f4f4f4;
     padding: 20px;
-    width: 28%; 
+    width: 20%; 
     height: 80%;
     margin-bottom: 15px;
     border-radius: 5px;
 }
 
 label {
-    font-weight: bold;
+    font-weight: 800;
+    font-family: "lora",serif;
 }
 
 select, input[type="range"] {
@@ -82,7 +91,10 @@ select, input[type="range"] {
     padding: 5px;
     font-size: 1rem;
 }
-
+.filters h3{
+    margin:8px 0px;
+    color: #242424;
+}
 
 .books-section {
     width: 68%; 
