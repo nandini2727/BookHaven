@@ -197,35 +197,29 @@ body {
 .milestones-section {
     padding: 50px;
     background-color: #f9f9f9; 
-    text-align: center; 
     display: flex; 
-    justify-content: space-between; 
-    flex-wrap: nowrap;
+    gap:10px;
 }
 
 .milestone {
-    display:flex;
     align-items: center; 
-    margin: 20px; 
     padding: 30px;
-    border-radius: 50%; 
-    background-color: #fff; 
+    border-right: 4px solid #45a049;
     flex: 1; 
     max-width: 400px;
     min-height: 150px;
+    height: auto;
 }
 
-.milestone:hover{
-    /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
-    background-color: #f6fee6;
-    transform: translateY(-5px);
+.milestone:last-child {
+    border-right: none;
 }
 
-.milestone-number {
+.milestone-logo {
     font-size: 2em; 
     font-weight: bold; 
     color: #308d36; 
-    margin-right: 20px; 
+    margin-bottom: 10px; 
 }
 
 .milestone-content h3 {
@@ -238,7 +232,6 @@ body {
     color: #666; 
     font-size: 1.2em;
 }
-
 
 
 /* ----------LATEST ARRIVALS-------------*/
