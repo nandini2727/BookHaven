@@ -21,6 +21,8 @@ API_KEY = config('API_KEY')
 
 USE_THOUSAND_SEPARATOR = True 
 
+ALLOWED_HOSTS=['*']
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -136,6 +138,14 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+APPEND_SLASH=True
+
+SESSION_COOKIE_DOMAIN = None
+CSRF_COOKIE_DOMAIN = False
+
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

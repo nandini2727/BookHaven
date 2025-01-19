@@ -4,14 +4,18 @@
 {% block title %} <title>BookHaven</title> {% endblock title %}
 {% block static %}
         <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 {% endblock static %}
 
 {% block body %}
-    {% block content %}{% endblock content %}
+    {% block navbar %}{% endblock navbar %}
+    {% include "navbar.html" %}
+   <section class="header-section">
     <div class="header">
         <h1>Welcome to BookHaven</h1>
         <p>Your one-stop destination for educational e-books and resources.</p>
     </div>
+   </section>
     <div class="user-dialog" id="user-dialog">
         {% if user.is_authenticated %}
             <p>Hello, {{ user.first_name }}</p>
@@ -21,81 +25,119 @@
         {% endif %}
     </div>
     <div class="container">
-        <div class="search-bar">
-            <form method="get" action="{% url 'shop' %}">
-                <input type="text" name="q" placeholder="Search for books..." value="{{ request.GET.q|default:'' }}">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-        <h2>Categories</h2>
+        <section class="sec-categories">
+        <h1><span>Our </span>Categories</h1>
         <div class="categories">
             <div class="category">
-                <a href="{% url 'shop' %}?category=Mechanical+Engineering">
+                <img src="static\resources\mech.jpg" alt="Mechanical" />
+                <div class="cat">
                     <h2><i class="fa-solid fa-gears"></i></h2>
                     <h3>Mechanical Engineering</h3>
                     <p>Designing motion, building the future.</p>
-                </a>
+                    <a href="{% url 'shop' %}?category=Mechanical+Engineering"><button>Show more
+                    </button></a>
+                </div>
             </div>
             <div class="category">
-                <a href="{% url 'shop' %}?category=Civil+Engineering">
+                <img src="static\resources\civil.jpg" alt="civil" />
+                <div class="cat">
                     <h2><i class="fa-solid fa-helmet-safety"></i></h2>
                     <h3>Civil Engineering</h3>
                     <p>Constructing infrastructure for better living.</p>
-                </a>
+                    <a href="{% url 'shop' %}?category=Civil+Engineering"><button>Show more
+                    </button></a>
+                </div>
             </div>
             <div class="category">
-                <a href="{% url 'shop' %}?category=Electrical+Engineering">
+                <img src="static\resources\ele.jpg" alt="Electrical" />
+                <div class="cat"> 
                     <h2><i class="fa-solid fa-lightbulb"></i></h2>
                     <h3>Electrical Engineering</h3>
                     <p>Powering the world with innovation.</p>
-                </a>
+                    <a href="{% url 'shop' %}?category=Electrical+Engineering">
+                        <button>Show more
+                        </button></a>
+                </div>
             </div>
             <div class="category">
-                <a href="{% url 'shop' %}?category=Computer+Science+Engineering">
-                <h2><i class="fa-solid fa-code"></i></h2>
-                <h3>Computer Engineering</h3>
-                <p>Building smarter tech for tomorrow.</p>
-                </a>
+                <img src="static\resources\comp.jpg" alt="computer" />
+                <div class="cat">
+                    <h2><i class="fa-solid fa-code"></i></h2>
+                    <h3>Computer Engineering</h3>
+                    <p>Building smarter tech for tomorrow.</p>
+                    <a href="{% url 'shop' %}?category=Computer+Science+Engineering"><button>Show more
+                    </button></a>
+                </div>
             </div>
             <div class="category">
-                <a href="{% url 'shop' %}?category=Aerospace+Engineering">
+                <img src="static\resources\aero_1.jpg" alt="Aerospace" />
+                <div class="cat">
                     <h2><i class="fa-solid fa-plane"></i></h2>
                     <h3>Aerospace Engineering</h3>
                     <p>Exploring skies, reaching new heights.</p>
-                </a>
+                    <a href="{% url 'shop' %}?category=Aerospace+Engineering"><button>Show more
+                    </button></a>
+                </div>
             </div>
             <div class="category">
-                <a href="{% url 'shop' %}?category=Chemical+Engineering">
+                <img src="static\resources\chem_2.jpg" alt="Chemical" />
+                <div class="cat">
                     <h2><i class="fa-solid fa-vial"></i></h2>
                     <h3>Chemical Engineering</h3>
                     <p>Transforming materials for human progress.</p>
-                </a>
+                    <a href="{% url 'shop' %}?category=Chemical+Engineering"><button>Show more
+                    </button></a>
+                </div>
             </div>
             <div class="category">
-                <a href="{% url 'shop' %}?category=Biomedical+Engineering">
+                <img src="static\resources\bio_2.jpg" alt="Biomedical" />
+                <div class="cat">
                     <h2><i class="fa-solid fa-tablets"></i></h2>
                     <h3>Biomedical Engineering</h3>
                     <p>"Engineering solutions for healthier lives.</p>
-                </a>
+                    <a href="{% url 'shop' %}?category=Biomedical+Engineering"><button>Show more
+                    </button></a>
+                </div>
             </div>
             <div class="category">
-                <a href="{% url 'shop' %}?category=Robotics+Engineering">
-                    <h2><i class="fa-solid fa-robot"></i></h2>
-                    <h3>Robotics Engineering</h3>
-                    <p>"Innovating machines to mimic humans.</p>
-                </a>
-            </div>
-            <div class="category">
-                <a href="{% url 'shop' %}?category=Marine+Engineering">
+                <img src="static\resources\marine.jpg" alt="Mechanical" />
+                <div class="cat">
                     <h2><i class="fa-solid fa-ship"></i></h2>
                     <h3>Marine Engineering</h3>
                     <p>Engineering for oceans and beyond.</p>
-                </a>
+                    <a href="{% url 'shop' %}?category=Marine+Engineering"><button>Show more
+                    </button></a>
+                </div>
             </div>
         </div>
+    </section>
+        <!-- IMAGE SLIDER -->
+        <section class="containerS">
+            <div class="text">
+                <h1 class="txt1">Discover Knowledge at Your Fingertips.</h1>
+                <h1 class="txt2">Learn Smarter with Our eBook Library.</h1>
+                <h1 class="txt3">Your Gateway to Affordable Education.</h1>
+            </div>    
+            <div class="slide-wrapper">
+                <div class="slider">
+                    <img id="slide-1" src="static\resources\slide1.jpg" alt=img1 />
+                    <img id="slide-2" src="static\resources\slide2.jpg" alt=img2 />
+                    <img id="slide-3" src="static\resources\slide3.jpg" alt=img3 />
+                </div>
+                <div class="slider-nav">
+                    <a href="#slide-1"></a>
+                    <a href="#slide-2"></a>
+                    <a href="#slide-3"></a>
+                </div>
+            </div>
+        </section>
 
-        <h2 id="products">Featured Products</h2>
-        <div class="carousel-container">
+        <section class="sec-categories2">
+            <div class="explore">
+                <h1 id="products">Featured Products</h1>
+                <p><span>Explore Our Featured Products!</span></p>
+            </div>
+            <div class="carousel-container">
             <button class="prev-btn">❮</button>
             <div class="carousel">
                 {% for book in  featured_books%}
@@ -112,13 +154,25 @@
             </div>
             <button class="next-btn">❯</button>
         </div>
+    </section>
     </div>
 
+    <!-- LOGO SLIDER -->
+    <div class="logo-slider">
+        <div class="slider-track">
+            <img src="static/resources/CRC_Press.svg" alt="Logo 1">
+            <img src="static/resources/McGraw.svg" alt="Logo 2">
+            <img src="static/resources/Pearson_logo.svg" alt="Logo 3">
+            <img src="static/resources/Sage-logo.svg" alt="Logo 4">
+            <img src="static/resources/Wiley_logo.svg" alt="Logo 5">
+            <img src="static/resources/springer.svg" alt="Logo 5">
+        </div>
+    </div>
 
         <!-- LATEST ARRIVALS -->
         
         <section class="arrivals">
-            <h2>Latest Arrivals</h2>
+            <h1>Latest <span>Arrivals</span></h1>
             <div class="newArr">
                 
                 <div class="newArr-category">
@@ -139,8 +193,22 @@
                 </div>
             </div>
         </section>
-
-
+        {% if browsing_history|length > 0 %}
+            <h2 id="products">Recently Viewed Products</h2>
+            <div class="carousel-container">
+                <button class="prev-btn">❮</button>
+                <div class="carousel">
+                    {% for book in  browsing_history%}
+                        <div class="card">
+                            <a href={% url "product" book.id %}>
+                            <img src="{{book.cover_image}}" alt="{{book.title}}">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="next-btn">❯</button>
+            </div>
+        {% endif %}
         <!-- MILESTONES -->
         <div class="milestones-section">
             <div class="milestone">

@@ -1,0 +1,28 @@
+<nav class="navbar">
+    <div class="logo">
+        <a href="/">
+            <i class="fa-solid fa-book-open"></i> BookHaven</a>
+    </div>
+    <ul class="nav-links">
+        <!-- Search box -->
+        <li>
+            <div class="searchBox"> 
+                <form method="get" action="{% url 'shop' %}">
+                    <input type="text" name="q" placeholder="Search for books..." value="{{ request.GET.q|default:'' }}">
+                    <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass fa-lg searchBtn"></i>
+                </button>
+                </form>
+            <!-- <i class="fa-solid fa-xmark closeBtn" id="closeBtn"></i> -->
+        </div>
+        <i class="fa-solid fa-magnifying-glass fa-lg searchBtn" id="searchIcon"></i>
+        </li>
+        <li><a href="/shop">Shop</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <div class="nav-icons">
+            <li id="user-icon"><i  class="fa-solid fa-user"></i></li>
+            <li><a href="/books/wishlist"> <i class="fa-regular fa-heart"></i><span id="wishlist-count">{{ wishlist_count }}</span></a></li>
+            <li><a href="/cart/cart"> <i class="fa-solid fa-cart-shopping"></i><span id="cart-count">{{ cart_count }}</span></i></a></li>
+        </div>
+    </ul>
+</nav>

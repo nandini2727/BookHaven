@@ -6,7 +6,8 @@ from django.template import loader
 from books.models import *
 from .models import Contact
 from django.db.models import Q
-
+from books.utils import track_browsing_history
+from .utils import get_browsing_history
 def home(request):
     categories = Category.objects.all()
     featured_books = []
@@ -18,11 +19,14 @@ def home(request):
             featured_books.append(book)
         if latest_book:
             latest_arrival.append(latest_book)
+    browsing_history = get_browsing_history(request)
     context={
         "categories":categories,
         "featured_books":featured_books,
-        "latest_arrival":latest_arrival
+        "latest_arrival":latest_arrival,
+        'browsing_history': browsing_history
         }
+    
     return render(request,"home.html",context)
 
 
@@ -113,6 +117,6 @@ def signup(request):
 
 def product(request,book_id):
     book = get_object_or_404(Book, id= book_id)
-
+    track_browsing_history(request, book_id)
     # Pass the book to the template for rendering
     return render(request, 'product.html', {'book': book})

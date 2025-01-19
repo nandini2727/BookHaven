@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Cart,CartItem
-from .models import Coupon
+from .models import Coupon,Address, Order, OrderItem,Cart,CartItem
 
 @admin.register(Coupon)
 class CouponAdmin(admin.ModelAdmin):
@@ -9,3 +8,6 @@ class CouponAdmin(admin.ModelAdmin):
     search_fields = ['code']
 admin.site.register(Cart)
 admin.site.register(CartItem)
+admin.site.register(Address)
+admin.site.register(Order)
+admin.site.register(OrderItem)

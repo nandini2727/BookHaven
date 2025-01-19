@@ -92,7 +92,7 @@
                     <div class="book-card">
                         <a href='{% url "product" book.id %}'>
                             <img src="{{ book.cover_image }}" alt="{{ book.title }}" loading="eager">
-                            <div>{{ book.title }}</div>
+                            <div class="book-title">{{ book.title|truncatechars:65 }}</div>
                             <p>{{ book.author }}</p>
                             <p>{{ book.category.name }}</p>
                             <p><span class="stars">★ </span>{{book.rating}} rating</p> 
@@ -103,10 +103,11 @@
                             {% else %}
                             <a href="{% url 'add_to_cart' book.id %}" ><button class="add-to-cart" data-book-id="{{ book.id }}">Add to Cart</button></a>
                             {% endif %}
-                            <a href="{% url 'add_to_wishlist' book.id %}" ><button class="wishlist" >Wishlist</button></a>
+                            <a href="{% url 'add_to_wishlist' book.id %}" ><div class="wishlist" ><i class="fa fa-heart"></i></div></a> 
+                        
                     </div>
                     {% empty %}
-                    <p class="no-books">No books found....</p>
+                    {% comment %} <p class="no-books">No books found....</p> {% endcomment %}
                     {% endfor %}
                     
                 </div>

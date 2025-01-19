@@ -12,13 +12,13 @@
     
 </head>
 <body>
+    {% block navbar %}
     <nav class="navbar">
         <div class="logo">
             <a href="/">
                 <i class="fa-solid fa-book-open"></i> BookHaven</a>
         </div>
         <ul class="nav-links">
-            {% block content %}
             <!-- Search box -->
             <li>
                 <div class="searchBox"> 
@@ -32,7 +32,6 @@
             </div>
             <i class="fa-solid fa-magnifying-glass fa-lg searchBtn" id="searchIcon"></i>
             </li>
-            {% endblock content %}
             <li><a href="/shop">Shop</a></li>
             <li><a href="/contact">Contact</a></li>
             <div class="nav-icons">
@@ -42,6 +41,7 @@
             </div>
         </ul>
     </nav>
+    {% endblock navbar %}
         <div class="user-dialog" id="user-dialog">
             {% if user.is_authenticated %}
                 <p>Hello, {{ user.first_name }}</p>
@@ -70,7 +70,20 @@
 <script src="https://kit.fontawesome.com/a853586d9a.js" crossorigin="anonymous"></script>
 <script src="{% static 'js/base.js' %}"> </script>
 
+<script>
+    const navbar = document.querySelector('.navbar');
+window.addEventListener('scroll', () => {
+  const scrollPosition = window.scrollY;
+
+  if (scrollPosition > 200) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+</script>
     
+<a href="#" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>    
   
 <div class="footer">
     <div class="footer-container">

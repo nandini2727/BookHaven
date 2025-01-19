@@ -27,8 +27,6 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    /* filter: blur(2px);
-    -webkit-filter: blur(1px); */
 }
 .hover-container {
     position: relative;

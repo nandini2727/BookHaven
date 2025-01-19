@@ -34,3 +34,40 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
+
+from django.db import models
+from django.contrib.auth.models import User
+
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=10)
+    address = models.TextField()
+    is_default = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.name} - {self.address[:30]}"
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
+    address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
+    payment_method = models.CharField(max_length=50, choices=(("cash", "Cash on Delivery"),))
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Order #{self.id} by {self.user.username}"
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
+    book_name = models.CharField(max_length=200)
+    category = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    cover_image = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.book_name} (Order #{self.order.id})"

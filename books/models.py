@@ -36,3 +36,19 @@ class Wishlist(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s wishlist - {self.book.name}"
+
+
+class BrowsingHistory(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='browsing_history')
+    books = models.ManyToManyField(Book, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s Browsing History"
+
+    def add_book(self, book):
+        # Add the book to the history
+        self.books.add(book)
+        # Limit to the latest 15 books
+        if self.books.count() > 15:
+            oldest_book = self.books.first()  # Assuming ManyToManyField preserves order
+            self.books.remove(oldest_book)

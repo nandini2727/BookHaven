@@ -1,0 +1,403 @@
+.checkout-container {
+    display: flex;
+    /* align-items: stretch;  */
+    justify-content: space-between;
+    gap: 40px;
+    /* min-height: 100vh; */
+    margin: 20px;
+    margin-top: 50px;
+  }
+
+   h2{
+    font-size: 30px;
+    /* font-weight: 600; */
+    text-align: center;
+  }
+  
+  .left-side {
+    flex: 2; /* Takes 2/3 of the space */
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px;  */
+    background-color: #fff;
+    /* padding: 20px; */
+    /* border-radius: 10px; */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --------------------ACCORDION------------------- */
+.accordion {
+    width: 100%;
+    padding: 0px;
+    /* margin: auto; */
+  }
+
+  .accordion li{
+    padding:0px;
+    list-style: none;
+    font-size: medium;
+    margin: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding-bottom: 5px;
+  }
+
+  .accordion li label:not(.payment-method label,.form-group label){
+    display: flex;
+    align-items: center;
+    padding: 5px 0 10px 25px;
+    font-size: 1.2em;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  label::before{
+    /* content: '+'; */
+    margin-right: 10px;
+    font-size: 24px;
+  }
+
+ input[type="radio"]{
+    visibility: hidden;
+  }
+  .accordion .content{
+    max-height: 0;
+    height: auto;
+    overflow: hidden;
+    transition: max-height 0.5s, padding 0.5s;
+  }
+  .accordion input[type="radio"]:checked + label + .content{
+    max-height:900px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #4CAF50;
+    background-color: #c5f5c3;
+  }
+
+  /* ----------------DELIVERY INFORMATION--------------- */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 5px 20px;
+  }
+
+  .add-address-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 2px;
+    border-radius: 2px;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
+  .add-address-btn:hover {
+    background-color: #218838;
+  }
+
+  #deliveryForm {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    font-size: 1em;
+    text-indent: 5px;
+    /* margin: 10px 0; */
+}
+
+.form-group label{
+  font-weight: 200;
+  padding: 5px 0 0 10px;
+  display: block;
+  margin-bottom: 5px;
+
+}
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"]
+{
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #ddd;
+}
+.form-group input[type="text"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="email"]:focus
+{
+  /* background-color: red; */
+  border: none;
+  border: 2px solid green;
+}
+.form-group {
+    flex: 1 1 45%; /* Each form group takes 45% width (leaves space for gap) */
+    /* margin: 10px 0; */
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+  
+  
+  /* ----------Address Cards-------------- */
+  .addresses {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+  }
+  
+  .address-card {
+    flex:1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px 30px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+  }
+  
+  .address-card input[type="radio"] {
+    margin-right: 10px;
+    visibility: visible;
+  }
+  
+  .address-card label {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: auto;
+    /* display: block; */
+  }
+  
+  .address-card p {
+    margin: 5px;
+    color: #555;
+    font-size: 0.9rem;
+  }
+  
+  .address-card .status {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .address-card .default {
+    color: red;
+  }
+  
+  .address-card .set-default {
+    color: green;
+  }
+  
+  .address-card .actions {
+    margin-top: 10px;
+  }
+  
+  .address-card .actions a {
+    margin-right: 15px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .address-card .actions a:hover {
+    text-decoration: underline;
+  }
+  
+  .address-card .actions a.delete {
+    color: red;
+  }
+  
+  /* -------------------PAYMENT METHOD---------------------- */
+.payment-method{
+  /* display: flex; */
+  /* gap: 50px; */
+  /* justify-content:space-between; */
+  height: fit-content;
+  width: 100%; 
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Radio Group */
+.radio-group {
+  margin-left: 10px;
+  margin-bottom: auto;
+  display: flex;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 10px; 
+  visibility: visible; 
+
+}
+
+.radio-group label {
+  font-size: 1.2rem;
+  font-weight: 200;
+  color: #000;
+}
+
+  /* -------------------Additional address---------------------- */
+  ul.more{
+    list-style: none;
+    margin: 0;
+    /* padding: 0; */
+    border-radius: 5px; 
+    background-color: #f9f9f9; 
+    overflow: hidden; 
+    max-height: 0;
+    /* width: 100%; */
+}
+
+#toggle-more:checked ~ ul.more {
+  max-height: 500px; 
+}
+
+ul.more li {
+  padding: 10px 15px; 
+  border-bottom: 1px solid #ddd;
+  cursor: pointer; 
+  transition: background-color 0.3s ease;
+ 
+}
+ul.more:active li{
+  display: block;
+}
+
+.more-add{
+  display: block;
+}
+
+.more-label {
+  display: block;
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.more-label:hover {
+  background-color: #f1f1f1;
+}
+
+/* -------------------ORDER SUMMARY----------------------- */
+  .order-summary2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-summary2 h3 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  /* Order Item Styles */
+  .order-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .order-item img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+  }
+  
+  .item-details {
+    flex-grow: 1;
+  }
+  
+  .item-details p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .item-details p:last-child {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  /* Quantity Controls
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-btn {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .quantity-btn:hover {
+    background-color: #ddd;
+  }
+  
+  .quantity-controls span {
+    margin: 0 10px;
+    font-size: 1rem;
+  } */
+  
+  /* Summary Totals */
+  .summary-totals {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: auto;
+  }
+  
+  .summary-totals p {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  
+  .summary-totals p strong {
+    font-size: 1.2rem;
+  }
+  
+  .summary-totals p span {
+    font-weight: bold;
+  }
+  
+  /* Confirm Order Button */
+  .confirm-order-btn {
+    width: 100%;
+    padding: 20px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .confirm-order-btn:hover {
+    background-color: #45a049;
+  }
+  
