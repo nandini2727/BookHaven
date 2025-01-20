@@ -38,12 +38,18 @@
                             <p>{{ address.city }}, {{ address.state }}, {{ address.zip_code }}</p>
                             <p>{{ address.phone }}</p>
                             <p class="status {% if address.is_default %}default{% endif %}">
-                                {% if address.is_default %}Default address{% else %}Set as Default{% endif %}
+                                {% if address.is_default %}
+                                    <p class="status default">Default Address</p>
+                                {% else %}
+                                    <p class="status set-default" data-address-id="{{ address.id }}">Set as Default</p>
+                                {% endif %}
                             </p>
                              <div class="actions">
                                 <a href="{% url 'delete_address' address.id %}" class="delete">Delete</a>
                             </div> 
                         </div>
+                        {% empty %}
+                            {% comment %} <p >Add Address </p> {% endcomment %}
                         {% endfor %}
                     </div>
                 </div>
@@ -113,21 +119,22 @@
     <!-- Order Summary -->
     <div class="order-summary2">
         <h3>Order Summary</h3>
+        {% for item in cart_items %}
         <div class="order-item">
             <!-- Loop through cart items (example: OrderItem) -->
-            {% for item in cart_items %}
-            <div class="item-details">
                 <img src="{{ item.book.cover_image }}" alt="{{ item.book_name }}">
-                <p>{{ item.book.title }}</p>
-                <p>{{ item.book.category }}</p>
-                <p>$ {{ item.book.price}}</p>
+                <div class="item-details">
+                    <p>{{ item.book.title }}</p>
+                    <p>{{ item.book.category }}</p>
+                    <p>₹{{ item.book.price}}</p>
             </div>
-            {% endfor %}
         </div>
+        
+        {% endfor %}
         <div class="summary-totals">
-            <p>Subtotal: <span>$ {{ subtotal }}</span></p>
-            <p>Shipping: <span>$ {{ shipping_cost }}</span></p>
-            <p><strong>Total: <span>$ {{ total }}</span></strong></p>
+            <p>Subtotal: <span> ₹{{ subtotal }}</span></p>
+            <p>Shipping: <span> ₹{{ shipping_cost }}</span></p>
+            <p><strong>Total: <span>₹{{ total|floatformat:2 }}</span></strong></p>
         </div>
         <form method="post" id="checkoutForm" action="{% url 'checkout' %}">
             {% csrf_token %}
@@ -137,6 +144,28 @@
         </form>
     </div>
 </div>
-
+    <script>
+        document.querySelectorAll('.set-default').forEach(p => {
+            p.addEventListener('click', function() {
+                const addressId = this.dataset.addressId;
+                fetch(`/set-default-address/${addressId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        location.reload(); // Reload the page to reflect changes
+                    } else {
+                        alert(data.message);
+                    }
+                });
+            });
+        });
+        
+    </script>
     <script src="{% static "js/checkout.js" %}"></script>
 {% endblock body %}

@@ -45,6 +45,10 @@ body {
 .container span{
     color: #029907;
 }
+.header span{
+    color: #45a049;
+    font-size: larger;
+}
 .search-bar {
     text-align: center;
     margin: 20px 0;
@@ -76,6 +80,7 @@ body {
 .containerS{
     padding: 20px;
     overflow: hidden;
+    position: relative;
 }
 .slide-wrapper{
     position:relative;
@@ -320,11 +325,11 @@ body {
     margin-top: 10px;
     transform: translateY(100%);
     text-align: center;
-    animation: slideDown 0.3s forwards;
+    animation: slideDown 0.4s forwards;
 }
 
 .category:hover .cat {
-    animation: slideUp 0.3s forwards;
+    animation: slideUp 0.4s forwards;
 }
 
 @keyframes slideUp {
@@ -389,7 +394,27 @@ body {
 .category:hover{
     box-shadow: 0 2px 15px rgba(71, 162, 76 , 0.4);
 }
-
+.containerS button{
+    height: auto;
+    width: auto;
+    padding: 15px 20px;
+    background-color: #1f2421;
+    color: white;
+    border: none;
+    z-index:100;
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+.containerS button:hover{
+    border: 2px solid #3e8e41;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
 
 /* //////////////////////////////////////// */  
 .logo-slider {
@@ -428,7 +453,30 @@ body {
       transform: translateX(-100%);
     }
 }
- 
+
+.h {
+    margin: 30px auto;
+    text-align: center;
+    font-size: 28px;
+}
+.card2 {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+    height: auto;
+    max-width: fit-content;
+    padding: 10px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+
+}
+.card2 img{
+    width: 100%;
+    object-fit: contain;
+}
+
 /* .categories{
     display: flex;
     flex-wrap: wrap;

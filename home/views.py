@@ -120,3 +120,5 @@ def product(request,book_id):
     track_browsing_history(request, book_id)
     # Pass the book to the template for rendering
     return render(request, 'product.html', {'book': book})
+
+

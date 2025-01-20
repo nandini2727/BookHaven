@@ -40,23 +40,32 @@
                 <li><a href="/cart/cart"> <i class="fa-solid fa-cart-shopping"></i><span id="cart-count">{{ cart_count }}</span></i></a></li>
             </div>
         </ul>
+        <div class="sub-menu-wrap" id="sub-menu-wrap">
+            <div class="sub-menu">
+                <div class="user-dialog" id="user-dialog">
+                    {% if user.is_authenticated %}
+                        <h3>Hello, {{ user.first_name }}</h3>
+                        <hr>
+                        <a href="/order-history" class="sub-menu-link"> 
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <p>Order History </p>
+                        </a>
+                        <a href="{% url 'logout' %}" id="logout-btn" class="sub-menu-link">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <p>Logout</p>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'signin' %}" id="login-btn" class="sub-menu-link">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            <p>Login</p>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </nav>
     {% endblock navbar %}
-        <div class="user-dialog" id="user-dialog">
-            {% if user.is_authenticated %}
-                <p>Hello, {{ user.first_name }}</p>
-                <a href="{% url 'logout' %}" id="logout-btn">Logout</a>
-            {% else %}
-                <a href="{% url 'signin' %}" id="login-btn">Login</a>
-            {% endif %}
-        </div>
-        {% comment %} <div class="search-bar">
-            <form method="get" action="{% url 'shop' %}">
-                <input type="text" name="q" placeholder="Search for books..." value="{{ request.GET.q|default:'' }}">
-                <button type="submit">Search</button>
-            </form>
-        </div> {% endcomment %}
-        
+    
     
     {% if messages %}
     <ul class="messages">

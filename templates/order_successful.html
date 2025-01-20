@@ -1,11 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Successful</title>
-    <link rel="stylesheet" href="{% static 'css/order-successful.css' %}">
+    <link rel="stylesheet" href="{% static 'css/order_successful.css' %}">
 </head>
 <body>
     <div class="container">
@@ -17,11 +17,11 @@
             <ul>
                 <li><strong>Order ID:</strong> {{ order.id }}</li>
                 <li><strong>Order Date:</strong> {{ order.created_at }}</li>
-                <li><strong>Total Amount:</strong> ${{ order.total }}</li>
+                <li><strong>Total Amount:</strong> ₹{{ order.total }}</li>
                 <li><strong>Payment Method:</strong> {{ order.payment_method }}</li>
                 <li><strong>Delivery Address:</strong>
                     <p>{{ order.address.name }}</p>
-                    <p>{{ order.address.address_line_1 }}</p>
+                    <p>{{ order.address.address }}</p>
                     <p>{{ order.address.city }}, {{ order.address.state }} - {{ order.address.zip_code }}</p>
                     <p>{{ order.address.phone }}</p>
                 </li>
@@ -30,7 +30,7 @@
 
         <div class="actions">
             <a href="{% url 'home' %}" class="btn btn-primary">Continue Shopping</a>
-            {% comment %} <a href="{% url 'orders' %}" class="btn btn-secondary">View My Orders</a> {% endcomment %}
+            <a href="{% url 'order_history' %}" class="btn btn-secondary">View My Orders</a> 
         </div>
     </div>
 </body>

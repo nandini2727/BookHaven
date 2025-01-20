@@ -12,18 +12,10 @@
     {% include "navbar.html" %}
    <section class="header-section">
     <div class="header">
-        <h1>Welcome to BookHaven</h1>
+        <h1>Welcome to <span>BookHaven</span></h1>
         <p>Your one-stop destination for educational e-books and resources.</p>
     </div>
    </section>
-    <div class="user-dialog" id="user-dialog">
-        {% if user.is_authenticated %}
-            <p>Hello, {{ user.first_name }}</p>
-            <a href="{% url 'logout' %}" id="logout-btn">Logout</a>
-        {% else %}
-            <a href="{% url 'signin' %}" id="login-btn">Login</a>
-        {% endif %}
-    </div>
     <div class="container">
         <section class="sec-categories">
         <h1><span>Our </span>Categories</h1>
@@ -113,6 +105,7 @@
     </section>
         <!-- IMAGE SLIDER -->
         <section class="containerS">
+            <a href="\shop"><button>SHOP NOW!</button></a>
             <div class="text">
                 <h1 class="txt1">Discover Knowledge at Your Fingertips.</h1>
                 <h1 class="txt2">Learn Smarter with Our eBook Library.</h1>
@@ -194,19 +187,17 @@
             </div>
         </section>
         {% if browsing_history|length > 0 %}
-            <h2 id="products">Recently Viewed Products</h2>
+            <h2 id="products" class="h">Recently Viewed Products</h2>
             <div class="carousel-container">
-                <button class="prev-btn">❮</button>
                 <div class="carousel">
                     {% for book in  browsing_history%}
-                        <div class="card">
+                        <div class="card2">
                             <a href={% url "product" book.id %}>
                             <img src="{{book.cover_image}}" alt="{{book.title}}">
                             </a>
                         </div>
                     {% endfor %}
                 </div>
-                <button class="next-btn">❯</button>
             </div>
         {% endif %}
         <!-- MILESTONES -->
@@ -229,7 +220,7 @@
                 <div class="milestone-logo"><i class="fa-solid fa-gift"></i></div>
                 <div class="milestone-content">
                     <h3>Best Prices & Offers</h3>
-                    <p>Cheaper prices than your local supermarket, great cashback offers to top it off. Get best pricess & offers.</p>
+                    <p>Cheaper prices than your local bookstore, great cashback offers to top it off. Get best pricess & offers.</p>
                 </div>
             </div>
             <div class="milestone">

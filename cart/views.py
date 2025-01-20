@@ -10,7 +10,7 @@ from .models import Coupon,Order,OrderItem
 import json
 from .utils import recommend_books
 
-
+discount = Decimal(0)
 @login_required(login_url="signin")
 def cart_view(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
@@ -58,6 +58,7 @@ def add_to_cart(request, book_id):
     cart_item, created = CartItem.objects.get_or_create(cart=cart, book=book)
     cart_item.quantity += 1
     cart_item.save()
+    messages.success(request,"Added To Cart")
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url="signin")
@@ -129,7 +130,8 @@ def checkout(request):
 
     # Calculate the total
     total = subtotal + shipping_cost
-
+    tax= total * Decimal(0.10)
+    total=total+tax
     # Get all addresses associated with the user
     addresses = Address.objects.filter(user=request.user)
 
@@ -147,15 +149,15 @@ def checkout(request):
         selected_address_id = request.POST.get("selected_address")
         payment_method = request.POST.get("payment_method")
 
-        # Validate the selected address
+        if not selected_address_id:
+            messages.error(request, "Please select a delivery address before placing the order.")
+            return redirect("checkout")
+        
         try:
             selected_address = Address.objects.get(id=selected_address_id, user=request.user)
         except Address.DoesNotExist:
             selected_address = None
-
-        if not selected_address:
-            context["error"] = "Please select a valid address."
-            return render(request, "checkout.html", context)
+            
 
         order = Order.objects.create(
             user=request.user,
@@ -204,6 +206,7 @@ def add_address(request):
             messages.error(request, "All fields are required. Please fill in all the details.")
             return redirect("checkout")  # Redirect back to checkout if validation fails
 
+        has_default_address = Address.objects.filter(user=request.user, is_default=True).exists()
         # Save the address
         Address.objects.create(
             user=request.user,
@@ -214,19 +217,14 @@ def add_address(request):
             state=state,
             zip_code=zip_code,
             address=address_line,
+            is_default=not has_default_address
         )
-
         messages.success(request, "Address added successfully!")
         return redirect("checkout")  # Redirect to checkout page after successful submission
 
     # If GET request, render the checkout page
     return redirect("checkout")
-
-@login_required(login_url="signin")
-def delete_address(request, address_id):
-    address = Address.objects.get(id=address_id)
-    address.delete()
-    return redirect('checkout')
+ 
 
 from django.shortcuts import render
 
@@ -239,3 +237,46 @@ def order_success(request, order_id):
 
     context = {"order": order}
     return render(request, "order_successful.html", context)
+
+def order_history(request):
+    orders = Order.objects.filter(user=request.user).prefetch_related("items")
+    return render(request, "order-history.html", {"orders": orders})
+
+
+def set_default_address(request, address_id):
+    if request.method == "POST":
+        try:
+            # Get the selected address
+            selected_address = Address.objects.get(id=address_id, user=request.user)
+
+            # Reset all addresses for the user
+            Address.objects.filter(user=request.user).update(is_default=False)
+
+            # Set the selected address as default
+            selected_address.is_default = True
+            selected_address.save()
+
+            return JsonResponse({"success": True, "message": "Default address updated successfully!"})
+        except Address.DoesNotExist:
+            return JsonResponse({"success": False, "message": "Address not found."})
+    return JsonResponse({"success": False, "message": "Invalid request method."})
+
+@login_required(login_url="signin")
+def delete_address(request, address_id):
+    try:
+        address = Address.objects.get(id=address_id, user=request.user)
+        is_default = address.is_default
+        address.delete()
+
+        # If the deleted address was default, set another address as default
+        if is_default:
+            next_address = Address.objects.filter(user=request.user).first()
+            if next_address:
+                next_address.is_default = True
+                next_address.save()
+
+        messages.success(request, "Address deleted successfully.")
+    except Address.DoesNotExist:
+        messages.error(request, "Address not found.")
+
+    return redirect("checkout")

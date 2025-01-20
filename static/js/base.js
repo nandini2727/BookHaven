@@ -1,22 +1,18 @@
 const userIcon = document.getElementById('user-icon');
 const userDialog = document.getElementById('user-dialog');
+const subMenuWrap = document.querySelector('.sub-menu-wrap');
 
-userIcon.addEventListener('click', () => {
-    if (userDialog.style.display === 'none' || userDialog.style.display === '') {
-        userDialog.style.display = 'block';
-    } else {
-        userDialog.style.display = 'none';
-    }
+userIcon.addEventListener('click', (event) => {
+    event.stopPropagation(); // Prevent the click event from bubbling up
+    subMenuWrap.classList.toggle('open');
 });
 
-// Close the dialog when clicking outside of it
+
 document.addEventListener('click', (event) => {
-    if (!userIcon.contains(event.target) && !userDialog.contains(event.target)) {
-        userDialog.style.display = 'none';
+    if (!subMenuWrap.contains(event.target) && !userIcon.contains(event.target)) {
+        subMenuWrap.classList.remove('open');
     }
 });
-
-
         
 const searchIcon = document.getElementById("searchIcon");
 const searchBox = document.querySelector(".searchBox");
@@ -30,10 +26,6 @@ if (searchIcon.classList.contains("fa-magnifying-glass")) {
     }
 });
 document.addEventListener("DOMContentLoaded", function() {
-    
-
-    console.log(searchIcon); // Should log the icon element
-    console.log(searchBox); // Should log the search box element
 
     if (searchIcon && searchBox) {
         searchIcon.addEventListener("click", function() {

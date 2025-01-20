@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block title %} <title>Order History</title> {% endblock title %}
+{% block static %}
+        <link rel="stylesheet" href="{% static 'css/order-history.css' %}">
+{% endblock static %}
+
+{% block body %}
+<section class="order-his">
+    <h1>Your Order History</h1>
+
+    <div class="containerW">
+        <p>
+            <a href="/"> Home </a> >
+            <a href="#"> User </a> >
+            <a href="#"> Your Order </a>
+        </p>
+
+        {% for order in orders %}
+        <div class="order">
+            <div class="order-header">
+                <h5>Order Placed:</h5>
+                <p>{{ order.created_at|date:"F j, Y, g:i a" }}</p>
+                <h5>Total:</h5>
+                <p>₹{{ order.total }}</p>
+                <h5>Ship To:</h5>
+                <p>{{ order.address }}</p>
+            </div>
+
+            <div class="order-details">
+                {% for item in order.items.all %}
+                <div class="product">
+                    <img src="{{ item.cover_image }}" alt="{{ item.book_name }}">
+                    <div class="product-info">
+                        <h3>{{ item.category }}</h3>
+                        <h4>{{ item.book_name }}</h4>
+                        <p>Price: ₹{{ item.price }}</p>
+                        <div class="actions">
+                            <a href="{% url 'add_to_cart' item.id %}">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% empty %}
+        <p>No orders found. Start shopping now!</p>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endblock body%}

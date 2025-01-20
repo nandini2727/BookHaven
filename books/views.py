@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Book, Wishlist
+from django.contrib import messages
 
 # View to display the wishlist
 @login_required(login_url="signin")
@@ -14,6 +15,7 @@ def add_to_wishlist(request, book_id):
     book = Book.objects.get(id=book_id)
     if not Wishlist.objects.filter(user=request.user, book=book).exists():
         Wishlist.objects.create(user=request.user, book=book)
+    messages.success(request,"Added to Wishlist")
     return redirect(request.META.get('HTTP_REFERER', '/'))  # Redirect to the same page
 
 # Remove a book from the wishlist

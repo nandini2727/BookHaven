@@ -84,7 +84,11 @@
             <input type="text" id="promo-code-input" placeholder="Promo code or Gift Card">
             <button id="apply-promo">Apply</button>
         </div>
-        <button class="checkout-btn"><a href="/checkout">Checkout</a></button>
+        {% if cart.items.all %}
+             <button class="checkout-btn"><a href="{% url "checkout"  %}">Checkout</a></button>
+        {% else %}
+             <button class="checkout-btn"><a href="/shop">Go to shop</a></button>
+        {% endif %}
     </div>
 </div>
 <h2 id="products">Recommended Books</h2>

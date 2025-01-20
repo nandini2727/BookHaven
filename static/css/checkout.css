@@ -194,6 +194,7 @@
   
   .address-card .set-default {
     color: green;
+    cursor: pointer;
   }
   
   .address-card .actions {

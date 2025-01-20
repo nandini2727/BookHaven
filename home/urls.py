@@ -12,4 +12,6 @@ urlpatterns=[
     path("checkout/", cart_views.checkout, name="checkout"),
     path("add-address/", cart_views.add_address, name="add_address"),
     path("order-success/<int:order_id>/", cart_views.order_success, name="order_success"),
+    path("order-history/", cart_views.order_history, name="order_history"),
+    path("set-default-address/<int:address_id>/", cart_views.set_default_address, name="set_default_address"),
 ]

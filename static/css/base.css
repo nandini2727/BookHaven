@@ -56,78 +56,113 @@ margin: 0px 15px;
 font-size: larger;
 
 .navbar span{
-  color: white;
+  color: w;
 }
 
 }
 .navbar .nav-icons li{
 margin-right: 15px;
 }
-#user-icon{
-position: relative;
-cursor: pointer;
+/* ------SIDEBAR---------- */
+.sub-menu-wrap{
+  position: absolute;
+  top:100%; 
+  right: 2%;
+  width: 370px;
+  gap: 10px;
+  overflow: hidden;
+  height: 0;
+  transition: max-height 0.5s ease-in-out;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  max-height: 0; 
+  overflow: hidden; 
 }
-.user-dialog {
-    display: none;
-    position: absolute;
-    top: 50px;
-    right: 80px;
-    padding: 10px;
-    background-color: white;
-    border: 1px solid #999;
-    border-radius: 8px;
-    padding: 0px 10px;
-    text-align: center;
-    box-shadow: inset 0 0 5px rgba(114, 205, 98, 0.866);
-    z-index: 1000;
+
+.sub-menu-wrap.open {
+  height: auto;
+  animation: slideDown 0.5s ease-in-out;
+
+  max-height: 500px;
 }
-.user-dialog a {
-display: block;
-margin: 5px 0;
-font-weight: 500;
-text-decoration: none;
-color: #333;
+
+@keyframes slideDown {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 500px;
+  }
 }
-.user-dialog a:hover{
-color: #19821c;
-text-decoration: none;
+.sub-menu-wrap a {
+  display: flex; 
+  padding: 10px 15px; 
+  background-color: #fff; 
+  text-decoration: none; 
+  color: #333; 
+  font-weight: 500;
+  transition: background-color 0.3s ease; 
 }
-.user-dialog p{
-color:#333;
-padding: 0px;
+.sub-menu{
+  background-color: #fefefe;
+  box-shadow: inset 0 0 30px rgba(108, 206, 22, 0.312);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid green;
+  padding: 20px;
+  margin: 10px;
+}
+.user-dialog{
+  display: flex;
+  flex-direction: column;
+}
+.user-dialog h3{
+  font-size: 1.2em;
+}
+.user-dialog p,
+.user-dialog h3{
+  font-weight: 500;
+  color:#333;
+  padding: 5px;
+  padding-top:15px;
+}
+
+.user-dialog img{
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 25px;
+}
+.sub-menu hr{
+  border: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #ccc;
+  margin: 15px 0 10px;
+}
+.sub-menu-link{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin: 12px 0;
+}
+.sub-menu-link p{
+  width: 100%;
+}
+.sub-menu-link i{
+  width: 60px;
+  background-color: #ddd;
+  border-radius: 50%;
+  padding: 20px;
+  margin-right: 15px;
 }
 .nav-icons span{
 font-size: small;
 margin:4px 2px;
 }
-/* .search-bar {
-text-align: center;
-margin: 20px 0;
+#user-icon{
+  cursor: pointer;
 }
-
-.search-bar input {
-padding: 10px;
-width: 40%;
-border: 1px solid #868585;
-border-radius: 5px;
+#user-icon :hover{
+  color:#ddd;
 }
-
-.search-bar button {
-padding: 10px 20px;
-background-color: #4CAF50;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-font-size: 0.85rem;
-font-weight: 500;
-}
-
-.search-bar button:hover {
-background-color: #45a049;
-
-} */
-
 /* Search box styling */
 .searchBox {
 position: absolute;

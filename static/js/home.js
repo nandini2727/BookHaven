@@ -9,7 +9,7 @@ const totalCards = document.querySelectorAll('.card').length;
 
 nextBtn.addEventListener('click', () => {
     scrollPosition -= cardWidth;
-    if (Math.abs(scrollPosition) >= cardWidth * (totalCards-11)) {
+    if (Math.abs(scrollPosition) >= cardWidth * (totalCards-3)) {
         scrollPosition = 0; // Reset to the start
     }
     carousel.style.transform = `translateX(${scrollPosition}px)`;
@@ -17,13 +17,13 @@ nextBtn.addEventListener('click', () => {
 prevBtn.addEventListener('click', () => {
     scrollPosition += cardWidth;
     if (scrollPosition > 0) {
-        scrollPosition = -(cardWidth * (totalCards - 12)); // Go to the last card
+        scrollPosition = -(cardWidth * (totalCards - 4)); // Go to the last card
     }
     carousel.style.transform = `translateX(${scrollPosition}px)`;
 });
 setInterval(()=>{
     scrollPosition -= cardWidth;
-    if (Math.abs(scrollPosition) >= cardWidth * (totalCards-11)) {
+    if (Math.abs(scrollPosition) >= cardWidth * (totalCards-3)) {
         scrollPosition = 0; // Reset to the start
     }
     carousel.style.transform = `translateX(${scrollPosition}px)`;

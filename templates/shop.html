@@ -96,7 +96,7 @@
                             <p>{{ book.author }}</p>
                             <p>{{ book.category.name }}</p>
                             <p><span class="stars">★ </span>{{book.rating}} rating</p> 
-                            <p> ₹{{ book.price }}</p>
+                            <p class="price"> ₹{{ book.price }}</p>
                         </a>
                             {% if book.stock == 0 %}
                                 <p class="out-of-stock" >Out Of Stock</p>
@@ -107,7 +107,7 @@
                         
                     </div>
                     {% empty %}
-                    {% comment %} <p class="no-books">No books found....</p> {% endcomment %}
+                    <p class="no-books">No books found....</p>
                     {% endfor %}
                     
                 </div>
