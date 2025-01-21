@@ -31,11 +31,7 @@
                 {% if user.is_authenticated %}
                     <h3>Hello, {{ user.first_name }}</h3>
                     <hr>
-                    {% comment %} <a href="#" class="sub-menu-link">
-                        <i class="fa-solid fa-user"></i>
-                         <p>Personal Information </p>
-                    </a> {% endcomment %}
-                    <a href="#" class="sub-menu-link"> 
+                    <a href="/order-history" class="sub-menu-link"> 
                         <i class="fa-solid fa-clock-rotate-left"></i>
                         <p>Order History </p>
                     </a>

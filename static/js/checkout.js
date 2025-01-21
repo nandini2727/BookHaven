@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Set initial values for hidden inputs (default selections)
     const selectedAddress = document.querySelector("input[name='address']:checked");
-    const selectedPayment = document.querySelector("input[name='payment']:checked");
+    const selectedPayment = document.querySelector("input[name='payment_method']:checked");
 
     if (selectedAddress) {
         selectedAddressInput.value = selectedAddress.value;
@@ -48,8 +48,4 @@ document.addEventListener("DOMContentLoaded", function () {
     if (selectedPayment) {
         paymentMethodInput.value = selectedPayment.value;
     }
-    checkoutForm.addEventListener("submit", function (e) {
-        
-        console.log("Selected Address:", selectedAddressInput.value);
-    });
 });

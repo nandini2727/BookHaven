@@ -4,10 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static "resources/books-64.ico" %}">
     <title>Order Successful</title>
     <link rel="stylesheet" href="{% static 'css/order_successful.css' %}">
 </head>
 <body>
+        <!-- PRE LOADER ANIMATION -->
+    <div id="preloader">
+        <input type="checkbox" id="check">
+        <label for="check">
+            <div class="check-icon"></div>
+        </label>
+    </div>
+    <div id="content" style="display: none;">
+        {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <div class="container">
         <h1>Order Successful!</h1>
         <p>Thank you for your order! Your order has been placed successfully and is now being processed.</p>
@@ -33,5 +49,7 @@
             <a href="{% url 'order_history' %}" class="btn btn-secondary">View My Orders</a> 
         </div>
     </div>
+</div>
+<script src={% static "js/order_successful.js" %}></script>
 </body>
 </html>

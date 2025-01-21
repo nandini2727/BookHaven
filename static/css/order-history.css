@@ -89,3 +89,11 @@
 .actions a:hover {
     background: #016617;
 }
+.product-info hr{
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #ccc;
+    margin: 15px 0 10px;
+    transform: translateX(-50px);
+  }

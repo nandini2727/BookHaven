@@ -63,6 +63,7 @@ font-size: larger;
 .navbar .nav-icons li{
 margin-right: 15px;
 }
+
 /* ------SIDEBAR---------- */
 .sub-menu-wrap{
   position: absolute;
@@ -160,9 +161,7 @@ margin:4px 2px;
 #user-icon{
   cursor: pointer;
 }
-#user-icon :hover{
-  color:#ddd;
-}
+
 /* Search box styling */
 .searchBox {
 position: absolute;
@@ -213,14 +212,16 @@ cursor: pointer;
     list-style: none;
     background-color: #fefefe;
     margin: 5px 10px;
-    left: 42vw;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    top: 70px;
     padding: 10px 20px;
     width:auto;
     height: auto;
     border: 2px solid #999;
     border-radius: 5px;
     font-size: 1.2em;
-    z-index: 100;
+    z-index: 1000;
     box-shadow: inset 0 0 5px rgba(114, 205, 98, 0.866);
     animation: fadeOut 5s forwards; 
   }

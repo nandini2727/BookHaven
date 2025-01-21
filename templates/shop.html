@@ -93,7 +93,7 @@
                         <a href='{% url "product" book.id %}'>
                             <img src="{{ book.cover_image }}" alt="{{ book.title }}" loading="eager">
                             <div class="book-title">{{ book.title|truncatechars:65 }}</div>
-                            <p>{{ book.author }}</p>
+                            <p style="line-height:1.2em;">{{ book.author }}</p>
                             <p>{{ book.category.name }}</p>
                             <p><span class="stars">★ </span>{{book.rating}} rating</p> 
                             <p class="price"> ₹{{ book.price }}</p>

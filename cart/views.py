@@ -10,7 +10,7 @@ from .models import Coupon,Order,OrderItem
 import json
 from .utils import recommend_books
 
-discount = Decimal(0)
+
 @login_required(login_url="signin")
 def cart_view(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
@@ -125,13 +125,21 @@ def checkout(request):
     # Calculate the subtotal (sum of all cart item prices)
     subtotal = sum(item.total_price() for item in cart_items)
 
-    # Example shipping cost (replace this logic as needed)
-    shipping_cost = 50 if cart_items else 0
+    tax= subtotal * Decimal(0.10)
+    subtotal=subtotal+tax
+    coupon_id = request.session.get('coupon_id')
+    discount = Decimal(0)  # Default discount is 0
+    if coupon_id:
+        try:
+            coupon = Coupon.objects.get(id=coupon_id, active=True)
+            discount = (subtotal * coupon.discount) / 100
+        except Coupon.DoesNotExist:
+                del request.session['coupon_id']
 
+    shipping_cost = 50 if cart_items else 0
+    subtotal=subtotal-discount
     # Calculate the total
     total = subtotal + shipping_cost
-    tax= total * Decimal(0.10)
-    total=total+tax
     # Get all addresses associated with the user
     addresses = Address.objects.filter(user=request.user)
 
@@ -226,11 +234,11 @@ def add_address(request):
     return redirect("checkout")
  
 
-from django.shortcuts import render
-
 def order_success(request, order_id):
     try:
         order = Order.objects.get(id=order_id, user=request.user)
+        if "coupon_id" in request.session:
+            del request.session["coupon_id"]
     except Order.DoesNotExist:
         messages.error(request, "Order not found.")
         return redirect("home")

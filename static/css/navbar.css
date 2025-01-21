@@ -14,17 +14,20 @@
     background-color: transparent;
     transition: background-color 0.4s ease-in-out;
 }
-.navbar.scrolled {
-background-color: #4CAF50;
-}
+
 
 .navbar .logo a {
     font-size: 1.6em;
     font-weight: bold;
     text-decoration: none;
-    color: white;
+    color: #34ca3b;
 }
-
+.navbar.scrolled {
+  background-color: #4CAF50;
+  }
+.navbar.scrolled .logo a{
+  color: white;
+}
 .navbar .nav-links {
     list-style: none;
     display: flex;
@@ -57,6 +60,11 @@ background-color: #4CAF50;
     margin-right: 15px;
     
 }
+.navbar:not(.scrolled) .logo a:hover,
+.navbar:not(.scrolled) .nav-links a:hover,
+.navbar:not(.scrolled) .nav-links li:hover {
+    color:#19821c;
+} 
 /* ------SIDEBAR---------- */
 .sub-menu-wrap{
     position: absolute;

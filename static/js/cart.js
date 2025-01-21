@@ -73,5 +73,5 @@ setInterval(()=>{
     }
     carousel.style.transform = `translateX(${scrollPosition}px)`;
 
-},2500)
+},4000)
 
