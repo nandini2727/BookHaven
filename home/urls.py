@@ -14,4 +14,5 @@ urlpatterns=[
     path("order-success/<int:order_id>/", cart_views.order_success, name="order_success"),
     path("order-history/", cart_views.order_history, name="order_history"),
     path("set-default-address/<int:address_id>/", cart_views.set_default_address, name="set_default_address"),
+    path('manage_address/', cart_views.manage_address, name='manage_address'),
 ]

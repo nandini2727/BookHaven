@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book,Category,Wishlist
+from .models import Book,Category,Wishlist,BrowsingHistory
 # admin.site.register(Book)
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -8,4 +8,5 @@ class BookAdmin(admin.ModelAdmin):
     search_fields = ['title']
 admin.site.register(Category)
 admin.site.register(Wishlist)
+admin.site.register(BrowsingHistory)
 

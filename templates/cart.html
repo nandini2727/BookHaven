@@ -12,6 +12,7 @@
     <div class="cart-items">
         <h1>Your Cart</h1>
         <table>
+            
             <thead>
                 <tr>
                     <th>Product</th>
@@ -22,6 +23,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
+            
             <tbody id="cart-table-body">
                 {% for item in cart.items.all %}
                 <tr>
@@ -32,25 +34,30 @@
                         <form method="post" action="{% url 'update_cart' item.book.id %}">
                             {% csrf_token %}
                             <button type="submit" name="quantity" value="{{ item.quantity|add:-1 }}" class="decrease">-</button>
-                            <input type="number" name="show_quantity" value="{{ item.quantity}}" min="0" readonly>
-                            <button type="submit" name="quantity" value="{{ item.quantity|add:1 }}" class="increase">+</button>
+                            <input type="number" name="show_quantity" value="{{ item.quantity}}" min="0"  readonly>
+                            <button type="submit" name="quantity" value="{{ item.quantity|add:1 }}" {% if item.quantity > 4 %} disabled{% endif %}  class="increase">+</button>
                         </form>
                     </td>
                     <td class="total">₹{{ item.total_price }}</td>
                     <td>
                         <form method="post" action="{% url 'remove_from_cart' item.book.id %}">
-                            {% csrf_token %}
+                            {% csrf_token %}    
                             <button class="delete"><i class="fa-solid fa-trash"></i></button>
                         </form>
                     </td>
+                    
                 </tr>
                 {% empty %}
                 <tr>
                     <td colspan="6">Your cart is empty!</td>
                 </tr>
                 {% endfor %}
+            
             </tbody>
+            
+
         </table>
+        
         <a href="{% url 'home' %}" class="continue-shopping">Continue Shopping</a>
     </div>
 
@@ -67,8 +74,8 @@
         </div>
         <div class="summary-item">
             {% if discount > 0 %}
-                 <p>Discount ({{ coupon_code }})</p>
-                 <p id="discount">₹-{{ discount|floatformat:'2' }}</p>
+                 <p>Discount <span class="discount-box"> ({{ coupon_code }}) <a href={% url "clear_coupon" %}> x </a></span></p>
+                 <p id="discount">₹-{{ discount|floatformat:'2' }} </p>
             {% else %}
             <p>Discount:</p>
             <p id="discount">₹0.00</p>
@@ -104,6 +111,7 @@
                 <p>₹{{book.price}}</p>
                 </a>
                 <a href={% url "add_to_cart" book.id %}><button>Add +</button></a>
+                <a href="{% url 'add_to_wishlist' book.id %}" ><div class="wishlist" ><i class="fa fa-heart"></i></div></a> 
             </div>
         {% endfor %}
     </div>

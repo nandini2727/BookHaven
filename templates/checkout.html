@@ -7,8 +7,12 @@
 {% endblock static %}
 
 {% block body %}
-<h2>Delivery Information</h2>
-
+<h2><span class="color">Delivery</span> Information</h2>
+<p class="route">
+    <a href="/"> Home </a> >
+    <a href="/cart/cart"> Cart </a> >
+    <a href="#"> <span class="color">CheckOut </span></a>
+</p>
 <div class="checkout-container">
     <div class="left-side">
         <ul class="accordion">
@@ -23,35 +27,100 @@
                     <div class="addresses">
                         <!-- Loop through user addresses -->
                         {% for address in addresses %}
-                        <div class="address-card">
-                            <div class="radio-group">
-                                <input 
-                                    type="radio" 
-                                    id="address-{{ address.id }}" 
-                                    name="address" 
-                                    value="{{ address.id }}" 
-                                    {% if address.is_default %}checked{% endif %}
-                                >
-                                <label for="address-{{ address.id }}">{{ address.name }}</label>
+                            {% if forloop.counter <= 2 %}
+                            <div class="address-card">
+                                <div class="radio-group">
+                                    <input 
+                                        type="radio" 
+                                        id="address-{{ address.id }}" 
+                                        name="address" 
+                                        value="{{ address.id }}" 
+                                        {% if address.is_default %}checked{% endif %}
+                                    >
+                                    <label for="address-{{ address.id }}">{{ address.name }}</label>
+                                </div>
+                                <p>{{ address.address }}</p>
+                                <p>{{ address.city }}, {{ address.state }}, {{ address.zip_code }}</p>
+                                <p>{{ address.phone }}</p>
+                                <p class="status {% if address.is_default %}default{% endif %}">
+                                    {% if address.is_default %}
+                                        <p class="status default">Default Address</p>
+                                    {% else %}
+                                        <p class="status set-default" data-address-id="{{ address.id }}">Set as Default</p>
+                                    {% endif %}
+                                </p>
+                                <div class="actions">
+                                    <a href="#" 
+                                        class="edit-address-link" 
+                                        data-id="{{ address.id }}" 
+                                        data-name="{{ address.name }}" 
+                                        data-phone="{{ address.phone }}" 
+                                        data-email="{{ address.email }}" 
+                                        data-city="{{ address.city }}" 
+                                        data-state="{{ address.state }}" 
+                                        data-zip="{{ address.zip_code }}" 
+                                        data-address="{{ address.address }}">
+                                        Edit
+                                        </a>
+                                    <a href="{% url 'delete_address' address.id %}" class="delete">Delete</a>
+                                </div> 
                             </div>
-                            <p>{{ address.address }}</p>
-                            <p>{{ address.city }}, {{ address.state }}, {{ address.zip_code }}</p>
-                            <p>{{ address.phone }}</p>
-                            <p class="status {% if address.is_default %}default{% endif %}">
-                                {% if address.is_default %}
-                                    <p class="status default">Default Address</p>
-                                {% else %}
-                                    <p class="status set-default" data-address-id="{{ address.id }}">Set as Default</p>
-                                {% endif %}
-                            </p>
-                             <div class="actions">
-                                <a href="{% url 'delete_address' address.id %}" class="delete">Delete</a>
-                            </div> 
-                        </div>
-                        {% empty %}
-                            {% comment %} <p >Add Address </p> {% endcomment %}
+                            {% endif %}
+                            {% empty %}
+                            <p >Add Address </p>
                         {% endfor %}
+                        
                     </div>
+                    {% if addresses|length > 2 %}
+                    <input type="checkbox" id="toggle-more" hidden>
+                    <label for="toggle-more" class="more-label">See more addresses</label>
+                    <ul class="more">
+                        <div class="more-add">
+                            {% for address in addresses %}
+                                {% if forloop.counter > 2 %}
+                                    <li class="moreAdd">
+                                        <div class="address-card">
+                                            <div class="radio-group">
+                                                <input 
+                                                    type="radio" 
+                                                    id="address-{{ address.id }}" 
+                                                    name="address" 
+                                                    value="{{ address.id }}" 
+                                                    {% if address.is_default %}checked{% endif %}>
+                                                <label for="address-{{ address.id }}">{{ address.name }}</label>
+                                            </div>
+                                            <p>{{ address.address }}</p>
+                                            <p>{{ address.city }}, {{ address.state }}, {{ address.zip_code }}</p>
+                                            <p>{{ address.phone }}</p>
+                                            <p class="status {% if address.is_default %}default{% endif %}">
+                                                {% if address.is_default %}
+                                                    <p class="status default">Default Address</p>
+                                                {% else %}
+                                                    <p class="status set-default" data-address-id="{{ address.id }}">Set as Default</p>
+                                                {% endif %}
+                                            </p>
+                                            <div class="actions">
+                                                <a href="#" 
+                                                    class="edit-address-link" 
+                                                    data-id="{{ address.id }}" 
+                                                    data-name="{{ address.name }}" 
+                                                    data-phone="{{ address.phone }}" 
+                                                    data-email="{{ address.email }}" 
+                                                    data-city="{{ address.city }}" 
+                                                    data-state="{{ address.state }}" 
+                                                    data-zip="{{ address.zip_code }}" 
+                                                    data-address="{{ address.address }}">
+                                                    Edit
+                                                    </a>
+                                                <a href="{% url 'delete_address' address.id %}" class="delete">Delete</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </ul>
+                    {% endif %}
                 </div>
             </li>
 
@@ -78,8 +147,9 @@
                         <div class="header">
                             <h2>Add Delivery Address</h2>
                         </div>
-                        <form id="deliveryForm" method="post" action="{% url 'add_address' %}">
+                        <form id="deliveryForm" method="post" action="{% url 'manage_address' %}">
                             {% csrf_token %}
+                            <input type="hidden" id="editAddressId" name="address_id" value="">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" id="name" name="name" placeholder="Name" required>
@@ -108,7 +178,7 @@
                                 <label for="address">Address</label>
                                 <input type="text" id="address" name="address" placeholder="Address" required>
                             </div>
-                            <button type="submit" class="add-address-btn">Add</button>
+                            <button type="submit" class="add-address-btn">Add Address</button>
                         </form>
                     </div>
                 </div>
@@ -145,7 +215,7 @@
         </form>
     </div>
 </div>
-    <script>
+    {% comment %} <script>
         document.querySelectorAll('.set-default').forEach(p => {
             p.addEventListener('click', function() {
                 const addressId = this.dataset.addressId;
@@ -167,6 +237,9 @@
             });
         });
         
-    </script>
+    </script> {% endcomment %}
+
+
+
     <script src="{% static "js/checkout.js" %}"></script>
 {% endblock body %}

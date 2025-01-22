@@ -49,7 +49,10 @@ decreaseBtn.addEventListener('click', () => {
 
 increaseBtn.addEventListener('click', () => {
     let qty = parseInt(qtyInput.value);
-    qtyInput.value = qty + 1;
+    if(qty>4)
+      increaseBtn.disabled=true
+    else
+      qtyInput.value = qty + 1;
 });
 
 

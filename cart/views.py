@@ -53,6 +53,19 @@ def cart_view(request):
 
 @login_required(login_url="signin")
 def add_to_cart(request, book_id):
+    if request.method == "POST":
+        product_id = request.POST.get("product_id")
+        quantity = int(request.POST.get("quantity", 1))  # Default to 1 if not provided
+
+        # Get the product
+        product = get_object_or_404(Book, id=product_id)
+
+        # Get or create the cart item
+        cart_item, created = Cart.objects.get_or_create(
+            user=request.user,
+            book=book,
+            defaults={"quantity": quantity},
+        )
     book = get_object_or_404(Book, id=book_id)
     cart, created = Cart.objects.get_or_create(user=request.user)
     cart_item, created = CartItem.objects.get_or_create(cart=cart, book=book)
@@ -97,6 +110,7 @@ def apply_coupon(request):
                 # Store the coupon ID in the session
                 request.session["coupon_id"] = coupon.id
                 return JsonResponse({"success": True, "message": "Coupon applied successfully!"})
+                
             else:
                 return JsonResponse({"success": False, "message": "This coupon is expired."})
         except Coupon.DoesNotExist:
@@ -107,7 +121,8 @@ def apply_coupon(request):
 def clear_coupon(request):
     if "coupon_id" in request.session:
         del request.session["coupon_id"]
-    return JsonResponse({"success": True, "message": "Coupon removed successfully!"})
+    messages.success(request,"Coupon removed successfully!")
+    return redirect("cart_view")
 
 
 
@@ -288,3 +303,40 @@ def delete_address(request, address_id):
         messages.error(request, "Address not found.")
 
     return redirect("checkout")
+
+@login_required(login_url='signin')
+def manage_address(request):
+    if request.method == "POST":
+        address_id = request.POST.get('address_id', None)  # Get address ID from form if editing
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email', '')  # Email is optional
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zip_code = request.POST.get('zip_code')
+        address = request.POST.get('address')
+
+        if address_id:  # If address_id exists, update the existing address
+            address_instance = get_object_or_404(Address, id=address_id)
+            address_instance.name = name
+            address_instance.phone = phone
+            address_instance.email = email
+            address_instance.city = city
+            address_instance.state = state
+            address_instance.zip_code = zip_code
+            address_instance.address = address
+            address_instance.save()
+        else:  # Otherwise, create a new address
+            Address.objects.create(
+                user=request.user,
+                name=name,
+                phone=phone,
+                email=email,
+                city=city,
+                state=state,
+                zip_code=zip_code,
+                address=address
+            )
+        return redirect('checkout')  # Replace with your address list view name
+
+    return redirect('checkout')  # Redirect to address list for GET requests

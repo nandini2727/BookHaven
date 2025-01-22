@@ -75,3 +75,23 @@ setInterval(()=>{
 
 },4000)
 
+const selectAllCheckbox = document.getElementById('select-all');
+
+// Get all individual item checkboxes
+const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+
+// Add an event listener to "Select All" checkbox
+selectAllCheckbox.addEventListener('change', function () {
+    // Toggle the `checked` state of all item checkboxes
+    itemCheckboxes.forEach(checkbox => {
+        checkbox.checked = selectAllCheckbox.checked;
+    });
+});
+
+// Optional: Sync "Select All" checkbox state if all items are manually selected/unselected
+itemCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function () {
+        selectAllCheckbox.checked = Array.from(itemCheckboxes).every(cb => cb.checked);
+    });
+});
+

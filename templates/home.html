@@ -142,6 +142,7 @@
                         <p>₹{{book.price}}</p>
                         </a>
                         <a href={% url "add_to_cart" book.id %}><button>Add +</button></a>
+                        <a href="{% url 'add_to_wishlist' book.id %}" ><div class="wishlist" ><i class="fa fa-heart"></i></div></a> 
                     </div>
                 {% endfor %}
             </div>

@@ -259,7 +259,33 @@ body {
     background-color: #45a049;
     color: white;
 }
+.wishlist {
+    position: absolute;
+    border-radius: 2px solid #6a6a6a;
+    background-color: #4CAF50;
+    border-radius: 2px;
+    padding:10px 15px;
+    top:35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 1;
+}
+.wishlist i{
+    color: #fff;
+    font-size: 24px;
+}
+.wishlist:hover i{
+    color: rgb(252, 33, 69);
+}
+.card:hover .wishlist {
+    opacity: 1; 
+}
 
+button:hover {
+    opacity: 0.9;
+}
 /* .card{
     height: 50%;
     border: 1px solid #ddd;
