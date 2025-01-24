@@ -8,13 +8,12 @@
 
 {% block body %}
 <section class="order-his">
-    <h1>Your Order History</h1>
+    <h1><span class="color">Your</span> Order History</h1>
 
     <div class="containerW">
         <p>
             <a href="/"> Home </a> >
-            <a href="#"> User </a> >
-            <a href="#"> Your Order </a>
+            <a href="#"> <span class="color">Your Orders </span></a>
         </p>
 
         {% for order in orders %}
@@ -25,7 +24,7 @@
                 <h5>Total:</h5>
                 <p>₹{{ order.total }}</p>
                 <h5>Ship To:</h5>
-                <p>{{ order.address }}</p>
+                <p>{{ order.address_name }}, {{order.address_detail|truncatechars:30}}</p>
             </div>
 
             <div class="order-details">
@@ -36,8 +35,10 @@
                         <h3>{{ item.category }}</h3>
                         <h4>{{ item.book_name }}</h4>
                         <p>Price: ₹{{ item.price }}</p>
+                        <p>Quantity: {{ item.quantity }}</p>
                         <div class="actions">
-                            <a href="{% url 'add_to_cart' item.id %}">Add to Cart</a>
+                            <a href="{% url 'add_to_cart' item.book_id %}">Add to Cart</a>
+                            <a class="view-item" href="{% url "product" item.book_id %}">View your item</a>
                         </div>
                         <hr>
                     </div>

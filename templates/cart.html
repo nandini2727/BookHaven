@@ -10,7 +10,7 @@
 <div class="cart-container">
     <!-- Product Table -->
     <div class="cart-items">
-        <h1>Your Cart</h1>
+        <h1><span class="color">Your </span>Cart</h1>
         <table>
             
             <thead>
@@ -48,22 +48,26 @@
                     
                 </tr>
                 {% empty %}
-                <tr>
-                    <td colspan="6">Your cart is empty!</td>
-                </tr>
+                {% comment %} <tr>
+                </tr> {% endcomment %}
                 {% endfor %}
             
             </tbody>
             
 
         </table>
-        
+        {% if cart.items.all|length == 0 %}
+        <div class="empty-cart">
+            <img src="{% static "resources/emptycart.png" %}" alt="empty cart">
+            <p> Your cart is empty!</p>
+        </div>
+        {% endif %}
         <a href="{% url 'home' %}" class="continue-shopping">Continue Shopping</a>
     </div>
 
     <!-- Order Summary -->
     <div class="order-summary">
-        <h2>Order Summary</h2>
+        <h2><span class="color">Order</span> Summary</h2>
         <div class="summary-item">
             <p>Subtotal:</p>
             <p id="subtotal">₹{{ cart.total_price }}</p>
@@ -92,13 +96,13 @@
             <button id="apply-promo">Apply</button>
         </div>
         {% if cart.items.all %}
-             <button class="checkout-btn"><a href="{% url "checkout"  %}">Checkout</a></button>
+            <a href="{% url "checkout"  %}"><button class="checkout-btn">Checkout</button></a>
         {% else %}
-             <button class="checkout-btn"><a href="/shop">Go to shop</a></button>
+            <a href="/shop"><button class="checkout-btn">Go to shop</button></a>
         {% endif %}
     </div>
 </div>
-<h2 id="products">Recommended Books</h2>
+<h2 id="products">Recommended <span class="color">Books</span></h2>
 <div class="carousel-container">
     <button class="prev-btn">❮</button>
     <div class="carousel">

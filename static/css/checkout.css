@@ -426,7 +426,13 @@ ul.more:active li{
     background-color: #45a049;
   }
   
-  
+  .add-addr{
+    color:#218838;
+    margin:5px 25px;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+  }
   /* .more {
     display: none;
 }

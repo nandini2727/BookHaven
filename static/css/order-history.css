@@ -24,6 +24,9 @@
     padding: 10px;
 
 }
+.color{
+    color: #029907;
+}
 .order-header {
     background-color: #ddd;
     display: flex;

@@ -13,6 +13,7 @@ myenv/
 # Database file (if you're using SQLite)
 db.sqlite3
 
+staticfiles
 
 
 # Migrations (optional, only if you don't want them version-controlled)

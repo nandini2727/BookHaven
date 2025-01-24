@@ -124,3 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
+document.querySelector('.add-addr').addEventListener('click', function() {
+    document.getElementById('third_acc').checked = true;
+  });

@@ -13,32 +13,37 @@ document.addEventListener('click', (event) => {
         subMenuWrap.classList.remove('open');
     }
 });
-        
-const searchIcon = document.getElementById("searchIcon");
-const searchBox = document.querySelector(".searchBox");
-searchIcon.addEventListener("click", function () {
-if (searchIcon.classList.contains("fa-magnifying-glass")) {
-    searchIcon.classList.remove("fa-magnifying-glass", "searchBtn");
-    searchIcon.classList.add("fa-xmark", "closeBtn");
-} else {
-        searchIcon.classList.remove("fa-xmark", "closeBtn");
-        searchIcon.classList.add("fa-magnifying-glass", "searchBtn");
-    }
-});
-document.addEventListener("DOMContentLoaded", function() {
+const svg = document.querySelector('.searchBox i');
+const input = document.querySelector('.input');
 
-    if (searchIcon && searchBox) {
-        searchIcon.addEventListener("click", function() {
-            searchBox.classList.toggle("active");
-        });
-    } else {
-        console.error("Search icon or search box not found!");
-    }
-});
-document.addEventListener('click', (event) => {
-    if (!searchIcon.contains(event.target) && !searchBox.contains(event.target)) {
-        searchBox.classList.remove("active");
-        searchIcon.classList.remove("fa-xmark", "closeBtn");
-        searchIcon.classList.add("fa-magnifying-glass", "searchBtn");
-    }
-});
+svg.addEventListener('click', () => {
+  input.focus(); 
+});   
+// const searchIcon = document.getElementById("searchIcon");
+// const searchBox = document.querySelector(".searchBox");
+// searchIcon.addEventListener("click", function () {
+// if (searchIcon.classList.contains("fa-magnifying-glass")) {
+//     searchIcon.classList.remove("fa-magnifying-glass", "searchBtn");
+//     searchIcon.classList.add("fa-xmark", "closeBtn");
+// } else {
+//         searchIcon.classList.remove("fa-xmark", "closeBtn");
+//         searchIcon.classList.add("fa-magnifying-glass", "searchBtn");
+//     }
+// });
+// document.addEventListener("DOMContentLoaded", function() {
+
+//     if (searchIcon && searchBox) {
+//         searchIcon.addEventListener("click", function() {
+//             searchBox.classList.toggle("activate");
+//         });
+//     } else {
+//         console.error("Search icon or search box not found!");
+//     }
+// });
+// document.addEventListener('click', (event) => {
+//     if (!searchIcon.contains(event.target) && !searchBox.contains(event.target)) {
+//         searchBox.classList.remove("activate");
+//         searchIcon.classList.remove("fa-xmark", "closeBtn");
+//         searchIcon.classList.add("fa-magnifying-glass", "searchBtn");
+//     }
+// });

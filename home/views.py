@@ -8,6 +8,16 @@ from .models import Contact
 from django.db.models import Q
 from books.utils import track_browsing_history
 from .utils import get_browsing_history
+from django.conf.urls import handler404
+from django.shortcuts import render
+from cart.utils import recommend_books
+from cart.models import Cart
+# Custom 404 handler
+def custom_404_view(request, exception):
+    return render(request, "404.html", status=404)
+
+handler404 = custom_404_view
+
 def home(request):
     categories = Category.objects.all()
     featured_books = []
@@ -109,16 +119,21 @@ def shop(request):
     }
     return render(request, 'shop.html', context)
 
-def signin(request):
-    return render(request, "signin.html")
+# def signin(request):
+#     return render(request, "signin.html")
 
-def signup(request):
-    return render(request, "signup.html")
+# def signup(request):
+#     return render(request, "signup.html")
 
 def product(request,book_id):
     book = get_object_or_404(Book, id= book_id)
     track_browsing_history(request, book_id)
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        recommended_books=recommend_books(cart)
+    else:
+        recommended_books=[]
     # Pass the book to the template for rendering
-    return render(request, 'product.html', {'book': book})
+    return render(request, 'product.html', {'book': book, "recommended_books":recommended_books})
 
 

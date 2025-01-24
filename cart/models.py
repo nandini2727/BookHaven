@@ -54,7 +54,14 @@ class Address(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
-    address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
+    address_name = models.CharField(max_length=100)
+    address_phone = models.CharField(max_length=15)
+    address_email = models.EmailField()
+    address_city = models.CharField(max_length=100)
+    address_state = models.CharField(max_length=100)
+    address_zip_code = models.CharField(max_length=10)
+    address_detail = models.TextField()
+    # address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
     payment_method = models.CharField(max_length=50, default="Cash On Delivery")
     total = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -64,10 +71,12 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
+    book_id=models.IntegerField(default=1)
     book_name = models.CharField(max_length=200)
     category = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     cover_image = models.URLField(blank=True, null=True)
+    quantity=models.IntegerField(default=1)
 
     def __str__(self):
         return f"{self.book_name} (Order #{self.order.id})"

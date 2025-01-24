@@ -10,7 +10,9 @@ body {
     background-color: #f8f8f8;
     
 }
-
+.color{
+    color: #029907;
+}
 /* Cart Container */
 .cart-container {
     display: flex;
@@ -188,6 +190,7 @@ table th {
     cursor: pointer;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
     position: relative;
+    color:white;
     overflow: hidden;
     transition-duration: .3s;
   }
@@ -324,7 +327,7 @@ table th {
 .wishlist {
     position: absolute;
     border-radius: 2px solid #6a6a6a;
-    background-color: #4CAF50;
+    background-color: rgb(76, 175, 80,0.85);
     border-radius: 2px;
     padding:10px 15px;
     top:35%;
@@ -339,7 +342,7 @@ table th {
     font-size: 24px;
 }
 .wishlist:hover i{
-    color: rgb(252, 33, 69);
+    color: #fc2145;
 }
 .card:hover .wishlist {
     opacity: 1; 
@@ -357,5 +360,26 @@ button:hover {
 .discount-box a{
     font-size: medium;
     padding-bottom: 0px 5px 5px 0px;
+
+}
+.empty-cart{
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: center;
+    gap: 30px;
+    margin: 30px; 
+}
+.empty-cart img{
+    opacity: 0.55;
+    width: 40%;
+}
+.empty-cart p{
+    opacity: 1;
+    color: #3f3f3f;
+    font-size: 1.7em;
+    color: rgb(255, 79, 79);
+    font-weight: 600;
+    text-align: center;
 
 }

@@ -83,3 +83,19 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+
+.sub-menu-wrap a {
+    display: flex; 
+    padding: 10px 15px; 
+    background-color: #fff; 
+    text-decoration: none; 
+    color: #333; 
+    font-weight: 500;
+    font-size: medium;
+    transition: background-color 0.3s ease; 
+  }
+  .sub-menu-wrap p{
+    font-size: medium;
+}
+

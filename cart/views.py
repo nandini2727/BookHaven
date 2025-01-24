@@ -53,23 +53,16 @@ def cart_view(request):
 
 @login_required(login_url="signin")
 def add_to_cart(request, book_id):
-    if request.method == "POST":
-        product_id = request.POST.get("product_id")
-        quantity = int(request.POST.get("quantity", 1))  # Default to 1 if not provided
-
-        # Get the product
-        product = get_object_or_404(Book, id=product_id)
-
-        # Get or create the cart item
-        cart_item, created = Cart.objects.get_or_create(
-            user=request.user,
-            book=book,
-            defaults={"quantity": quantity},
-        )
     book = get_object_or_404(Book, id=book_id)
     cart, created = Cart.objects.get_or_create(user=request.user)
+    if request.method == "POST":
+        # For POST requests, get the quantity from the form
+        quantity = int(request.POST.get("quantity", 1))  # Default to 1 if quantity is not provided
+    else:
+        # For GET requests, default to adding one item
+        quantity = 1
     cart_item, created = CartItem.objects.get_or_create(cart=cart, book=book)
-    cart_item.quantity += 1
+    cart_item.quantity += quantity
     cart_item.save()
     messages.success(request,"Added To Cart")
     return redirect(request.META.get('HTTP_REFERER', '/'))
@@ -139,9 +132,7 @@ def checkout(request):
 
     # Calculate the subtotal (sum of all cart item prices)
     subtotal = sum(item.total_price() for item in cart_items)
-
     tax= subtotal * Decimal(0.10)
-    subtotal=subtotal+tax
     coupon_id = request.session.get('coupon_id')
     discount = Decimal(0)  # Default discount is 0
     if coupon_id:
@@ -152,7 +143,7 @@ def checkout(request):
                 del request.session['coupon_id']
 
     shipping_cost = 50 if cart_items else 0
-    subtotal=subtotal-discount
+    subtotal=subtotal-discount+tax
     # Calculate the total
     total = subtotal + shipping_cost
     # Get all addresses associated with the user
@@ -184,7 +175,14 @@ def checkout(request):
 
         order = Order.objects.create(
             user=request.user,
-            address=selected_address,
+            address_name=selected_address.name,
+            address_phone=selected_address.phone,
+            address_email=selected_address.email,
+            address_city=selected_address.city,
+            address_state=selected_address.state,
+            address_zip_code=selected_address.zip_code,
+            address_detail=selected_address.address,
+            # address=selected_address,
             payment_method=payment_method,
             total=total,
             created_at=now(),
@@ -194,10 +192,12 @@ def checkout(request):
         for cart_item in cart_items:
             OrderItem.objects.create(
                 order=order,
+                book_id=cart_item.book.id,
                 book_name=cart_item.book.title,
                 category=cart_item.book.category,
                 cover_image=cart_item.book.cover_image,
                 price=cart_item.book.price,
+                quantity=cart_item.quantity,
             )
 
         # Clear the cart
@@ -212,41 +212,41 @@ def checkout(request):
 
 
 
-@login_required(login_url='signin')
-def add_address(request):
-    if request.method == "POST":
-        # Extract data from the request.POST dictionary
-        name = request.POST.get("name")
-        phone = request.POST.get("phone")
-        email = request.POST.get("email")
-        city = request.POST.get("city")
-        state = request.POST.get("state")
-        zip_code = request.POST.get("zip_code")
-        address_line = request.POST.get("address")
+# @login_required(login_url='signin')
+# def add_address(request):
+#     if request.method == "POST":
+#         # Extract data from the request.POST dictionary
+#         name = request.POST.get("name")
+#         phone = request.POST.get("phone")
+#         email = request.POST.get("email")
+#         city = request.POST.get("city")
+#         state = request.POST.get("state")
+#         zip_code = request.POST.get("zip_code")
+#         address_line = request.POST.get("address")
 
-        # Validate required fields
-        if not all([name, phone, email, city, state, zip_code, address_line]):
-            messages.error(request, "All fields are required. Please fill in all the details.")
-            return redirect("checkout")  # Redirect back to checkout if validation fails
+#         # Validate required fields
+#         if not all([name, phone, email, city, state, zip_code, address_line]):
+#             messages.error(request, "All fields are required. Please fill in all the details.")
+#             return redirect("checkout")  # Redirect back to checkout if validation fails
 
-        has_default_address = Address.objects.filter(user=request.user, is_default=True).exists()
-        # Save the address
-        Address.objects.create(
-            user=request.user,
-            name=name,
-            phone=phone,
-            email=email,
-            city=city,
-            state=state,
-            zip_code=zip_code,
-            address=address_line,
-            is_default=not has_default_address
-        )
-        messages.success(request, "Address added successfully!")
-        return redirect("checkout")  # Redirect to checkout page after successful submission
+#         has_default_address = Address.objects.filter(user=request.user, is_default=True).exists()
+#         # Save the address
+#         Address.objects.create(
+#             user=request.user,
+#             name=name,
+#             phone=phone,
+#             email=email,
+#             city=city,
+#             state=state,
+#             zip_code=zip_code,
+#             address=address_line,
+#             is_default=not has_default_address
+#         )
+#         messages.success(request, "Address added successfully!")
+#         return redirect("checkout")  # Redirect to checkout page after successful submission
 
-    # If GET request, render the checkout page
-    return redirect("checkout")
+#     # If GET request, render the checkout page
+#     return redirect("checkout")
  
 
 def order_success(request, order_id):
@@ -262,7 +262,7 @@ def order_success(request, order_id):
     return render(request, "order_successful.html", context)
 
 def order_history(request):
-    orders = Order.objects.filter(user=request.user).prefetch_related("items")
+    orders = Order.objects.filter(user=request.user).prefetch_related("items").order_by("-created_at")
     return render(request, "order-history.html", {"orders": orders})
 
 
@@ -327,6 +327,8 @@ def manage_address(request):
             address_instance.address = address
             address_instance.save()
         else:  # Otherwise, create a new address
+            has_default_address = Address.objects.filter(user=request.user, is_default=True).exists()
+            # Save the address
             Address.objects.create(
                 user=request.user,
                 name=name,
@@ -335,8 +337,10 @@ def manage_address(request):
                 city=city,
                 state=state,
                 zip_code=zip_code,
-                address=address
+                address=address,
+                is_default=not has_default_address
             )
+            messages.success(request, "Address added successfully!")
         return redirect('checkout')  # Replace with your address list view name
 
     return redirect('checkout')  # Redirect to address list for GET requests

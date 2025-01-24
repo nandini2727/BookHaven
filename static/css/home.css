@@ -21,7 +21,7 @@ body {
 }
 
 .header-section{
-    background: url('./D:/naina/College project/BookHaven/static/resources/homeBG.jpg') center/cover no-repeat;
+    background: url('/static/resources/homeBG.jpg') center/cover no-repeat;
     text-align: center;
 }
 .header h1,
@@ -43,7 +43,7 @@ body {
     text-align: center;
 }
 .container span{
-    color: #029907;
+    color: #34ca3b;
 }
 .header span{
     color: #34ca3b;
@@ -76,7 +76,9 @@ body {
     background-color: #45a049;
 
 }
-
+.color{
+    color: #029907;
+}
 .containerS{
     padding: 20px;
     overflow: hidden;
@@ -262,7 +264,7 @@ body {
 .wishlist {
     position: absolute;
     border-radius: 2px solid #6a6a6a;
-    background-color: #4CAF50;
+    background-color: rgb(76, 175, 80,0.85);
     border-radius: 2px;
     padding:10px 15px;
     top:35%;

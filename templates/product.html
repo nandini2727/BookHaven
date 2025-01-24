@@ -25,8 +25,8 @@
                         <span>⭐ {{book.rating}} rating</span>
                     </div>
                     <div class="product-price">
-                        <span class="current-price"> &#8377;{{book.price|apply_discount:10}}</span>
-                        <span class="original-price">&#8377;{{book.price}}</span>
+                        <span class="current-price"> &#8377;{{book.price|apply_discount:10|floatformat:2}}</span>
+                        <span class="original-price">&#8377;{{book.price|floatformat:2}}</span>
                         <span class="discount">10%</span>
                     </div>
                     <hr>
@@ -40,15 +40,15 @@
                         </div>
                     
                         <!-- Quantity selector -->
-                        <form method="post" action="{% url 'add_to_cart' %}">
+                        <form method="post" action="{% url 'add_to_cart' book.id %}">
                             {% csrf_token %}
                             <input type="hidden" name="product_id" value="{{ book.id }}">
                         <div class="quantity-selector">
-                            <button class="qty-btn decrease">-</button>
-                            <input type="text" class="qty-input" value="1" max="5" readonly>
-                            <button class="qty-btn increase">+</button>
+                            <button type="button" class="qty-btn decrease">-</button>
+                            <input type="text" name="quantity" class="qty-input" value="1" max="5" readonly>
+                            <button type="button" class="qty-btn increase">+</button>
                         </div>
-                        {% comment %} <a href="{% url 'add_to_cart' book.id %}" ></a> {% endcomment %}
+                        
                         <!-- Action buttons -->
                         <div class="cart-actions">
                             {% if book.stock %}
@@ -107,7 +107,27 @@
                 <p>This section contains information about the seller...</p>
             </div>
         </div>
-
+        {% if user.is_authenticated %}
+        <h2 id="products">You might also <span class="color">like</span></h2>
+            <div class="carousel-container">
+                <button class="prev-btn">❮</button>
+                <div class="carousel">
+                    {% for book in  recommended_books%}
+                        <div class="card">
+                            <a href={% url "product" book.id%}>
+                            <img src="{{book.cover_image}}" alt="Book 1">
+                            <div>{{book.title}}</div>
+                            <p>{{ book.author|first_author }}</p>
+                            <p>₹{{book.price}}</p>
+                            </a>
+                            <a href={% url "add_to_cart" book.id %}><button>Add +</button></a>
+                            <a href="{% url 'add_to_wishlist' book.id %}" ><div class="wishlist" ><i class="fa fa-heart"></i></div></a> 
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="next-btn">❯</button>
+            </div>
+        {% endif %}
     <script src={% static "js/product.js" %}></script>
     </body>
 {% endblock body %}

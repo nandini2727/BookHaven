@@ -36,10 +36,10 @@
                 <li><strong>Total Amount:</strong> ₹{{ order.total }}</li>
                 <li><strong>Payment Method:</strong> {{ order.payment_method }}</li>
                 <li><strong>Delivery Address:</strong>
-                    <p>{{ order.address.name }}</p>
-                    <p>{{ order.address.address }}</p>
-                    <p>{{ order.address.city }}, {{ order.address.state }} - {{ order.address.zip_code }}</p>
-                    <p>{{ order.address.phone }}</p>
+                    <p>{{ order.address_name}}</p>
+                    <p>{{ order.address_detail }}</p>
+                    <p>{{ order.address_city}}, {{ order.address_state }} - {{ order.address_zip_code }}</p>
+                    <p>{{ order.address_phone }}</p>
                 </li>
             </ul>
         </div>

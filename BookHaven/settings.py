@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 API_KEY = config('API_KEY')
 
-USE_THOUSAND_SEPARATOR = True 
+USE_THOUSAND_SEPARATOR = True
 
 ALLOWED_HOSTS=['*']
 
@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-!@4-m3ru9@$%qvdjmyk7=65au-vh_pfn^ohz6m)w67zspm!u$e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTHENTICATION_BACKENDS = [
     'accounts.backends.EmailOrUsernameBackend',  # Custom backend
@@ -133,11 +133,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'  
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
 
 APPEND_SLASH=True
 

@@ -101,6 +101,7 @@ margin-right: 15px;
   text-decoration: none; 
   color: #333; 
   font-weight: 500;
+  font-size: medium;
   transition: background-color 0.3s ease; 
 }
 .sub-menu{
@@ -144,11 +145,12 @@ margin-right: 15px;
   text-decoration: none;
   margin: 12px 0;
 }
-.sub-menu-link p{
+.sub-menu-link p,h3{
   width: 100%;
+  margin: 0;
 }
 .sub-menu-link i{
-  width: 60px;
+  /* width: 60px; */
   background-color: #ddd;
   border-radius: 50%;
   padding: 20px;
@@ -164,17 +166,51 @@ margin:4px 2px;
 
 /* Search box styling */
 .searchBox {
+  position: relative;
+}
+
+.input {
+  width: 0px;
+  padding: 10px 0px 10px 40px;
+  background-color: transparent;
+  border: none;
+  transition: all .2s ease-in-out;
+  outline: none;
+  opacity: 0.8;
+}
+
+.searchBox i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: white;
+}
+
+.input:focus {
+  opacity: 1;
+  width: 260px;
+  background-color: #fefefe;
+  border-radius: 20px
+}
+.input:focus + .searchBtn{
+  color: #4CAF50;
+  margin: 2px 0 0 2px;
+}
+
+/* .searchBox {
 position: absolute;
 top: 70px; 
 transform: translateX(-30%);
-width: 400px; /* Width of the search box */
+width: 400px; 
 padding: 5px;
 background-color: #fefefe;
 border-radius: 5px;
 border:2px solid #4CAF50;
 box-shadow: 30px 4px 16px rgba(54, 181, 75, 0.1);
-display: none; /* Initially hidden */
-z-index: 1000; /* Ensure it appears above other elements */
+display: none; 
+z-index: 1000; 
 }
 
 .searchBox input {
@@ -200,12 +236,12 @@ outline: none;
 background-color: #fff;
 cursor: pointer;
 }
-.searchBox.active {
+.searchBox.activate {
 display: block;
 }
 #searchIcon{
 cursor: pointer;
-}
+} */
 /* MESSAGE */
 .messages{
     position: absolute;

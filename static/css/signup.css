@@ -83,3 +83,28 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+
+.sub-menu-wrap a {
+    display: flex; 
+    padding: 10px 15px; 
+    background-color: #fff; 
+    text-decoration: none; 
+    color: #333; 
+    font-weight: 500;
+    transition: background-color 0.3s ease; 
+  }
+.sub-menu-wrap p{
+    font-size: medium;
+}
+
+.input {
+    width: 0px;
+    padding: 10px 0px 10px 40px;
+    background-color: transparent;
+    border: none;
+    transition: all .2s ease-in-out;
+    outline: none;
+    opacity: 0.8;
+  }
+  
