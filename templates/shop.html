@@ -59,7 +59,13 @@
                         </li>
                     </ul>
                 </div>
+                {% comment %} <div class="dis">
+                    <img src="static\resources\dis4.jpeg" />
+                    <p>Discount 10% OFF!</p>
+                    <button>Shop now!</button>
+                </div> {% endcomment %}
             </div>
+            
             <div class="books-section">
                 <div class="title" id="title">
                     <p>{% if applied_filters.category == "all" %}All Books{% else %}{{applied_filters.category}}{% endif %}</p>

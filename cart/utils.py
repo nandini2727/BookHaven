@@ -44,7 +44,7 @@ def recommend_books(cart):
     # Sort by similarity, then by popularity and rating
     recommended_books = recommended_books.sort_values(
         by=['similarity_score', 'popularity', 'rating'], ascending=False
-    )[:9]  # Limit to top 5 recommendations
+    )[:9]  # Limit to top 9 recommendations
 
     # Fetch Book objects for the recommendations
     recommended_book_ids = recommended_books['id'].tolist()

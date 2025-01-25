@@ -212,43 +212,6 @@ def checkout(request):
 
 
 
-# @login_required(login_url='signin')
-# def add_address(request):
-#     if request.method == "POST":
-#         # Extract data from the request.POST dictionary
-#         name = request.POST.get("name")
-#         phone = request.POST.get("phone")
-#         email = request.POST.get("email")
-#         city = request.POST.get("city")
-#         state = request.POST.get("state")
-#         zip_code = request.POST.get("zip_code")
-#         address_line = request.POST.get("address")
-
-#         # Validate required fields
-#         if not all([name, phone, email, city, state, zip_code, address_line]):
-#             messages.error(request, "All fields are required. Please fill in all the details.")
-#             return redirect("checkout")  # Redirect back to checkout if validation fails
-
-#         has_default_address = Address.objects.filter(user=request.user, is_default=True).exists()
-#         # Save the address
-#         Address.objects.create(
-#             user=request.user,
-#             name=name,
-#             phone=phone,
-#             email=email,
-#             city=city,
-#             state=state,
-#             zip_code=zip_code,
-#             address=address_line,
-#             is_default=not has_default_address
-#         )
-#         messages.success(request, "Address added successfully!")
-#         return redirect("checkout")  # Redirect to checkout page after successful submission
-
-#     # If GET request, render the checkout page
-#     return redirect("checkout")
- 
-
 def order_success(request, order_id):
     try:
         order = Order.objects.get(id=order_id, user=request.user)
