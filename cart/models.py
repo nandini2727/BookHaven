@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from books.models import Book  
+from django.db import models
+
 
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cart")
@@ -35,8 +37,6 @@ class Coupon(models.Model):
     def __str__(self):
         return self.code
 
-from django.db import models
-from django.contrib.auth.models import User
 
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
@@ -61,7 +61,6 @@ class Order(models.Model):
     address_state = models.CharField(max_length=100)
     address_zip_code = models.CharField(max_length=10)
     address_detail = models.TextField()
-    # address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
     payment_method = models.CharField(max_length=50, default="Cash On Delivery")
     total = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -54,7 +54,7 @@
                             {% if book.stock %}
                                <button class="add-to-cart-btn" type = "submit">Add to cart</button>
                             {% else %}
-                                <button class="out-of-stock">Out Of Stock</button>
+                                <button type="button" class="out-of-stock">Out Of Stock</button>
                             {% endif %}
                         </form>
                             <button class="action-btn"><a href="{% url 'add_to_wishlist' book.id %}" ><i class="fa fa-heart"></i></a></button>

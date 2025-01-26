@@ -119,12 +119,6 @@ def shop(request):
     }
     return render(request, 'shop.html', context)
 
-# def signin(request):
-#     return render(request, "signin.html")
-
-# def signup(request):
-#     return render(request, "signup.html")
-
 def product(request,book_id):
     book = get_object_or_404(Book, id= book_id)
     track_browsing_history(request, book_id)
