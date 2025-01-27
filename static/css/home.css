@@ -9,7 +9,7 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); 
+    background: rgba(0, 0, 0, 0.5); 
     color: white;
     text-align: center;
     padding: 20px 0;
@@ -21,7 +21,7 @@ body {
 }
 
 .header-section{
-    background: url('/static/resources/homeBG.jpg') center/cover no-repeat;
+    background: url('/static/resources/homeBG4.jpg') center/cover no-repeat;
     text-align: center;
 }
 .header h1,
