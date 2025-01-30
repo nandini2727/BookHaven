@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Clone the slider track and append it
     const clonedTrack = sliderTrack.cloneNode(true);
+    clonedTrack.style.visibility = "hidden"; 
     sliderTrack.parentNode.appendChild(clonedTrack);
   
     // Adjust the width of the parent container
@@ -71,6 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const parentContainer = sliderTrack.parentNode;
     parentContainer.style.display = "flex";
     // parentContainer.style.width = `${totalWidth}px`;
+    setTimeout(() => {
+        clonedTrack.style.visibility = "visible";
+    }, 30);
   });
 
   document.addEventListener("DOMContentLoaded", function () {

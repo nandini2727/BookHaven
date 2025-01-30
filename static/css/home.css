@@ -335,12 +335,14 @@ button:hover {
     text-align: center;
     display: flex;
     justify-content: center;
+    
 }
 
 .category img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 15px;
 }
 
 .cat{
@@ -350,10 +352,11 @@ button:hover {
     width: 90%;
     z-index: 1;
     opacity: 0;
-    margin-top: 10px;
+    margin-top: 15px;
     transform: translateY(100%);
     text-align: center;
     animation: slideDown 0.4s forwards;
+    border-radius: 15px;
 }
 
 .category:hover .cat {
