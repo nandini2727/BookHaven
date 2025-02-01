@@ -335,7 +335,7 @@ button:hover {
     text-align: center;
     display: flex;
     justify-content: center;
-    
+    border-radius: 15px;
 }
 
 .category img{
