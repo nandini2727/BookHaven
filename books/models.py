@@ -35,7 +35,7 @@ class Wishlist(models.Model):
         unique_together = ('user', 'book')  # A user can only wishlist a book once
 
     def __str__(self):
-        return f"{self.user.username}'s wishlist - {self.book.name}"
+        return f"{self.user.username}'s wishlist - {self.book.title}"
 
 
 class BrowsingHistory(models.Model):
@@ -50,5 +50,5 @@ class BrowsingHistory(models.Model):
         self.books.add(book)
         # Limit to the latest 15 books
         if self.books.count() > 15:
-            oldest_book = self.books.first()  # Assuming ManyToManyField preserves order
+            oldest_book = self.books.first()  
             self.books.remove(oldest_book)

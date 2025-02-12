@@ -20,7 +20,7 @@ def track_browsing_history(request, book_id):
         browsing_history.insert(0, book_id)
 
         # Keep only the last 15 items
-        browsing_history = browsing_history[:10]
+        browsing_history = browsing_history[:15]
 
         # Save to session
         request.session['browsing_history'] = browsing_history

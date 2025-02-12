@@ -60,10 +60,13 @@
     margin-right: 15px;
     
 }
+.searchBox i:hover{
+  color: #8cfa90;
+}
 .navbar:not(.scrolled) .logo a:hover,
 .navbar:not(.scrolled) .nav-links a:hover,
 .navbar:not(.scrolled) .nav-links li:hover {
-    color:#5eff63;
+    color:#8cfa90;
 } 
 /* ------SIDEBAR---------- */
 .sub-menu-wrap{

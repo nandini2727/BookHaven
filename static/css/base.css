@@ -181,13 +181,15 @@ margin:4px 2px;
 
 .searchBox i {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 10px;
   transform: translate(0, -50%);
   cursor: pointer;
   color: white;
 }
-
+.searchBox i:hover{
+  color: #ddd;
+}
 .input:focus {
   opacity: 1;
   width: 260px;
