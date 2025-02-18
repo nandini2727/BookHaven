@@ -21,7 +21,9 @@ API_KEY = config('API_KEY')
 
 USE_THOUSAND_SEPARATOR = True
 
-ALLOWED_HOSTS=['*']
+CSRF_TRUSTED_ORIGINS = ["https://bookhaven-nofk.onrender.com"]
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -32,7 +34,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["bookhaven-nofk.onrender.com"]
 
 AUTHENTICATION_BACKENDS = [
     'accounts.backends.EmailOrUsernameBackend',  # Custom backend
@@ -161,6 +163,9 @@ CSRF_COOKIE_SECURE=True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CSRF_COOKIE_SECURE = True  # Set to True in production
+SESSION_COOKIE_SECURE = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
