@@ -48,7 +48,7 @@ Welcome to **BookHaven**, your one-stop platform for buying engineering books in
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/bookhaven.git
+   git clone https://github.com/nandini2727/bookhaven.git
    cd bookhaven
    ```
 
