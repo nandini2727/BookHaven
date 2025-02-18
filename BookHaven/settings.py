@@ -21,7 +21,6 @@ API_KEY = config('API_KEY')
 
 USE_THOUSAND_SEPARATOR = True
 
-CSRF_TRUSTED_ORIGINS = ["https://bookhaven-nofk.onrender.com"]
 
 
 
@@ -34,8 +33,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["bookhaven-nofk.onrender.com"]
-
+# ALLOWED_HOSTS = ["bookhaven-nofk.onrender.com","*"]
+ALLOWED_HOSTS=["*"]
 AUTHENTICATION_BACKENDS = [
     'accounts.backends.EmailOrUsernameBackend',  # Custom backend
     'django.contrib.auth.backends.ModelBackend', # Default backend
@@ -164,7 +163,12 @@ CSRF_COOKIE_SECURE=True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CSRF_COOKIE_SECURE = True  # Set to True in production
+# CSRF Settings
+CSRF_COOKIE_SECURE = True  # Use secure cookies in production
+CSRF_COOKIE_HTTPONLY = True  # Helps prevent cross-site scripting (XSS)
+CSRF_USE_SESSIONS = True  # Ensure CSRF tokens are tied to sessions
+CSRF_TRUSTED_ORIGINS = ["https://bookhaven-nofk.onrender.com", "http://localhost:8000"]  # Add both local and production URLs
+
 SESSION_COOKIE_SECURE = True
 
 # Default primary key field type
