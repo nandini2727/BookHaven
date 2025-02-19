@@ -15,7 +15,8 @@ function getCookie(name) {
     return cookieValue;
 }
 
-const csrftoken = getCookie('csrftoken');
+// const csrftoken = getCookie('csrftoken');
+const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 document.getElementById('apply-promo').addEventListener('click', function() {
     const promoCode = document.getElementById('promo-code-input').value;
@@ -31,6 +32,7 @@ document.getElementById('apply-promo').addEventListener('click', function() {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken  // Django CSRF token for security
         },
+        credentials: 'include',  // Allow cookies (important for Django authentication)
         body: JSON.stringify({ promo_code: promoCode })
     })
     .then(response => response.json())
@@ -66,32 +68,5 @@ prevBtn.addEventListener('click', () => {
     }
     carousel.style.transform = `translateX(${scrollPosition}px)`;
 });
-// setInterval(()=>{
-//     scrollPosition -= cardWidth;
-//     if (Math.abs(scrollPosition) >= cardWidth * (totalCards-3)) {
-//         scrollPosition = 0; // Reset to the start
-//     }
-//     carousel.style.transform = `translateX(${scrollPosition}px)`;
 
-// },4000)
-
-const selectAllCheckbox = document.getElementById('select-all');
-
-// Get all individual item checkboxes
-const itemCheckboxes = document.querySelectorAll('.item-checkbox');
-
-// Add an event listener to "Select All" checkbox
-selectAllCheckbox.addEventListener('change', function () {
-    // Toggle the `checked` state of all item checkboxes
-    itemCheckboxes.forEach(checkbox => {
-        checkbox.checked = selectAllCheckbox.checked;
-    });
-});
-
-// Optional: Sync "Select All" checkbox state if all items are manually selected/unselected
-itemCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
-        selectAllCheckbox.checked = Array.from(itemCheckboxes).every(cb => cb.checked);
-    });
-});
 
