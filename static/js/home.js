@@ -122,3 +122,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     setInterval(showNextSlide, 4000);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    function updateListItems() {
+        const listItems = document.querySelectorAll(".newArr-list li");
+
+        if (window.innerWidth <= 400) {
+            listItems.forEach((li) => {
+                let anchor = li.querySelector("a");
+                if (anchor) {
+                    // Replace <a> text inside <li> and remove the <a> tag
+                    li.innerHTML = anchor.innerHTML;
+                }
+            });
+        }
+    }
+
+    // Run on page load
+    updateListItems();
+
+    // Run when resizing the window
+    window.addEventListener("resize", updateListItems);
+});

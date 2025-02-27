@@ -14,6 +14,7 @@
         <div class="shop-page">
             <!-- Filters Section -->
             <div class="filters">
+                <button class="close-btn">&times;</button>
                 <h2>Filters</h2>
                 <h3>Categories</h3>
                 <select id="category-filter">
@@ -59,18 +60,16 @@
                         </li>
                     </ul>
                 </div>
-                {% comment %} <div class="dis">
-                    <img src="static\resources\dis4.jpeg" />
-                    <p>Discount 10% OFF!</p>
-                    <button>Shop now!</button>
-                </div> {% endcomment %}
             </div>
             
             <div class="books-section">
                 <div class="title" id="title">
                     <p>{% if applied_filters.category == "all" %}All Books{% else %}{{applied_filters.category}}{% endif %}</p>
                 </div>
+                
+                
                 <div class="sort-by">
+                    
                     <div class="format-filter">
                         <!-- Format Filter -->
                         <select id="format-filter">
@@ -91,6 +90,11 @@
                             <option value="newest" {% if applied_filters.sort == "newest" %}selected{% endif %}>Newest</option> 
                         </select>
                     </div>
+                    <button class="setting-btn">
+                        <span class="bar bar1"></span>
+                        <span class="bar bar2"></span>
+                        <span class="bar bar1"></span>
+                    </button>
                 </div>
                 <!-- Books Listing -->
                 <div class="books-container" id="books-container">
@@ -107,7 +111,7 @@
                             {% if book.stock == 0 %}
                                 <p class="out-of-stock" >Out Of Stock</p>
                             {% else %}
-                            <a href="{% url 'add_to_cart' book.id %}" ><button class="add-to-cart" data-book-id="{{ book.id }}">Add to Cart</button></a>
+                            <a href="{% url 'add_to_cart' book.id %}" ><button class="add-to-cart" data-book-id="{{ book.id }}">Add +</button></a>
                             {% endif %}
                             <a href="{% url 'add_to_wishlist' book.id %}" ><div class="wishlist" ><i class="fa fa-heart"></i></div></a> 
                         
@@ -137,6 +141,15 @@
     </div>
         <script src="{% static "js/shop.js" %}">            
         </script>        
-    </body>
+    <script>
+        document.querySelector('.setting-btn').addEventListener('click', function() {
+            document.querySelector('.filters').classList.add('active');
+        });
+        
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            document.querySelector('.filters').classList.remove('active');
+        });
+    </script>
+
     {% endblock body %}
 </html>

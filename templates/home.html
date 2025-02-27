@@ -190,7 +190,7 @@
         {% if browsing_history|length > 0 %}
             <h2 id="products" class="h">Recently Viewed <span class="color">Products</span></h2>
             <div class="carousel-container">
-                <div class="carousel">
+                <div class="carousel2">
                     {% for book in  browsing_history%}
                         <div class="card2">
                             <a href={% url "product" book.id %}>

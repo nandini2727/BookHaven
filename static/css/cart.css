@@ -383,3 +383,104 @@ button:hover {
     text-align: center;
 
 }
+
+@media (max-width: 400px) {
+    .cart-container {
+        flex-direction: column;
+        gap: 10px;
+        max-width: 95vw;
+        margin: 20px auto;
+    }
+
+    .cart-items, .order-summary {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .cart-items h1, .order-summary h2 {
+        font-size: 1.4rem;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    table th, table td {
+        padding: 8px;
+    }
+
+    .cart-item img {
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
+    }
+
+    .continue-shopping, .checkout-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .quantity {
+        width: 120px;
+    }
+
+    .quantity button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .quantity input {
+        width: 40px;
+        font-size: 12px;
+    }
+
+    .promo-code input {
+        width: calc(100% - 60px);
+        padding: 8px;
+    }
+
+    .promo-code button {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+
+    /* Carousel adjustments */
+    .carousel-container {
+        padding: 10px;
+        margin: 0px 10px 40px;
+    }
+
+    .card {
+        width: 180px;
+        height: 320px;
+        padding: 10px;
+    }
+
+    .card img {
+        height: 45%;
+    }
+
+    .card button {
+        padding: 8px 12px;
+        font-size: 12px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .wishlist {
+        padding: 8px;
+    }
+
+    .wishlist i {
+        font-size: 20px;
+    }
+
+    .empty-cart img {
+        width: 60%;
+    }
+
+    .empty-cart p {
+        font-size: 1.4em;
+    }
+}

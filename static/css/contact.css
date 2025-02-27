@@ -3,19 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* font-family: Arial, Helvetica, sans-serif */
-    /* font-family: "Montserrat", serif; */
 }
-
-/* body {
-    background-color: #f4f4f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-} */
-
 
 
 /* -----------------------------------------Hoverable Section */
@@ -231,5 +219,61 @@
     transform: scale(1.05);
 }
 
+@media (max-width: 400px) {
+    .hover-section {
+        height: 300px;
+    }
+
+    .hover-text {
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .hover-text p {
+        font-size: small;
+    }
+
+    .content-section {
+        flex-direction: column;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .contact-item {
+        width: 90%;
+        padding: 30px 15px;
+    }
+
+    .form-section {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .img-contact {
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .contact-form-container {
+        width: 90%;
+        padding: 30px;
+        margin: auto;
+    }
+
+    .contact-form-container h1 {
+        font-size: 20px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
 
 
