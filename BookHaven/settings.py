@@ -31,7 +31,7 @@ USE_THOUSAND_SEPARATOR = True
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ["bookhaven-nofk.onrender.com","*"]
 ALLOWED_HOSTS=["*"]
