@@ -313,24 +313,24 @@ background-color: #19821c;
 }
 
 #backToTop {
-    width: 70px;
-    height: 70px;
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    font-size: 24px;
-    background-color: #1ccc51;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    cursor: pointer;
-    /* display: none;  */
-    z-index: 1;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
+  width: 70px;
+  height: 70px;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  font-size: 24px;
+  background-color: #1ccc51;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  /* display: none;  */
+  z-index: 1;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
   
   #backToTop:hover {
     background-color: #1F2421;
@@ -344,11 +344,11 @@ background-color: #19821c;
 
 /* Social Icons */
 .social-icons a {
-color: white;
-margin-right: 10px;
-font-size: 20px;
-text-decoration: none;
-transition: transform 0.3s;
+  color: white;
+  margin-right: 10px;
+  font-size: 20px;
+  text-decoration: none;
+  transition: transform 0.3s;
 }
 .social-icons a:hover {
 color: #4CAF50;
@@ -364,57 +364,84 @@ display: inherit;
 margin: 0 15px 0 0;
 }
 
-@media (max-width: 400px) {
+@media screen and (max-width: 400px) {
   /* Adjust navbar */
   .navbar {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-.nav-icons span {
-  font-size: smaller;
-}
-.navbar .nav-items {
-  position: absolute;
-  top: 60px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  background-color: #4CAF50;
-  padding: 10px 0;
-  display: flex;
-  flex-direction: column;
-
-  transform: translateY(-100%);
-  opacity: 0;
-  visibility: hidden;
-  transition: transform 0.4s ease-out, opacity 0.3s ease-in-out;
-}
-
-.navbar .nav-items.activate {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
-}
-
-.navbar .nav-items li {
-    margin: 10px 0;
-
-}
-.navbar .nav-icons{
-  margin:0 ;
-  font-size: medium;
-}
-.navbar .nav-icons li{
-  position: relative;
-  bottom: 6px;
-}
-  /* Hide sidebar */
-  .sub-menu-wrap {
-      width: 100%;
-      right: 0;
+  }
+  .nav-icons span {
+    font-size: smaller;
+  }
+  .navbar .nav-items {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #4CAF50;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s ease-out, opacity 0.3s ease-in-out;
   }
 
+  .navbar .nav-items.activate {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar .nav-items li {
+    margin: 10px 0;
+
+  }
+  .navbar .nav-icons{
+    margin:0 ;
+    font-size: medium;
+  }
+  .navbar .nav-icons li{
+    position: relative;
+    bottom: 6px;
+  }
+  /* Hide sidebar */
+  .sub-menu-wrap {
+      width: 70%;
+      right: 0;
+  }
+  .sub-menu {
+    background-color: #fefefe;
+    /* box-shadow: inset 0 0 30px rgba(108, 206, 22, 0.312); */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid green;
+    padding: 15px;
+    margin: 10px;
+  }
+  .user-dialog p, .user-dialog h3 {
+    padding: 5px;
+    font-size: 0.9em;
+    padding-top: 0px;
+  }
+
+  .user-dialog h3 {
+    font-size: 1.1em;
+  }
+  .sub-menu hr {
+    margin: 5px 0 10px;
+  }
+  .sub-menu-wrap a {
+    padding: 8px 10px;
+  }
+  .sub-menu-link{
+    margin:8px 0;
+  }
+  .sub-menu-link i {
+    padding: 15px;
+  }
   .input{
       opacity: 1;
       width: 260px;
@@ -424,6 +451,12 @@ margin: 0 15px 0 0;
   .searchBox i{
     display: none;
   }
+  .messages{
+    width:max-content;
+    font-size: 1em;
+    padding: 8px 15px;
+  }
+
   /* Adjust footer */
   .footer-container {
       flex-direction: column;
@@ -484,5 +517,4 @@ margin: 0 15px 0 0;
     stroke-dasharray: 20 300;
     stroke-dashoffset: -32.42;
   }
-
 }

@@ -519,7 +519,7 @@ button:hover {
     }
   
     .card {
-      width: 100%;
+      width:200px;
       height: auto;
       padding: 10px;
       margin-right: 10px;

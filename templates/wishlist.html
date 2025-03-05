@@ -13,7 +13,7 @@
     <div class="wishlist-container">
         <h1>My Wishlist</h1>
         <p id="product-count">There are {{ wishlist_items|length }} products in this wishlist.</p>
-
+        <div class="wishlist-table">
         <table>
             <thead>
                 <tr>
@@ -52,6 +52,7 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
     </div>
     <script src="{% static 'js/wishlist.js' %}"></script>
 </body>

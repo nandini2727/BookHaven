@@ -11,10 +11,10 @@
             <form id="loginForm" method='POST' action={% url "signin" %}>
                 {% csrf_token %}
                 <label for="email">Email or username</label>
-                <input type="text" id="email" name="username" required>
+                <input type="text" id="email" name="username" class ="input-field" required>
 
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" class ="input-field" required>
 
                 <button type="submit" id="loginButton">Sign-In</button>
             </form>

@@ -57,7 +57,7 @@
                                 <button type="button" class="out-of-stock">Out Of Stock</button>
                             {% endif %}
                         </form>
-                            <button class="action-btn"><a href="{% url 'add_to_wishlist' book.id %}" ><i class="fa fa-heart"></i></a></button>
+                            <a href="{% url 'add_to_wishlist' book.id %}" ><button class="action-btn" type="button"><i class="fa fa-heart"></i></button></a>
                         </div>
                     </div>
                     <hr>

@@ -29,9 +29,9 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
-.cart-item img {
-    width: 50px; /* Adjust size as needed */
-    height: 50px; /* Adjust size as needed */
+td img {
+    width: 60px; /* Adjust size as needed */
+    height: auto; /* Adjust size as needed */
     margin-right: 10px; /* Space between image and text */
 }
 
@@ -383,7 +383,9 @@ button:hover {
     text-align: center;
 
 }
-
+.delete-span{
+    display: none;
+}
 @media (max-width: 400px) {
     .cart-container {
         flex-direction: column;
@@ -406,21 +408,36 @@ button:hover {
     }
 
     table th, table td {
-        padding: 8px;
+        padding: 5px;
     }
 
-    .cart-item img {
-        width: 40px;
-        height: 40px;
+    td img {
+        width: 45px;
         margin-right: 5px;
     }
-
+    .delete-span{
+        display: inline;
+        z-index: 100;
+        background-color: rgba(200, 200, 200, 0.8);
+        color: #444;
+        padding: 3px 8px 5px;
+        line-height: 0;
+        border-radius: 50%;
+        position: relative;
+        top: -80px;
+        font-weight: lighter;
+        text-align: center;
+        font-size: small;
+        right: 26%;
+    }
     .continue-shopping, .checkout-btn {
         width: 100%;
         padding: 10px;
         font-size: 14px;
     }
-
+    #products{
+        margin: 80px 20px 0;
+    }
     .quantity {
         width: 120px;
     }
@@ -456,26 +473,39 @@ button:hover {
         height: 320px;
         padding: 10px;
     }
-
+    .card div{
+        font-size: 0.9em;
+    }
+    .card p{
+        font-size: 0.8em;
+    }
     .card img {
         height: 45%;
     }
-
+    .remove{
+        display: none;
+    }
     .card button {
         padding: 8px 12px;
         font-size: 12px;
         bottom: 20px;
         right: 20px;
     }
-
-    .wishlist {
-        padding: 8px;
+    .prev-btn,.next-btn{
+        padding: 10px 8px;
     }
-
-    .wishlist i {
+    .wishlist {
+        opacity: 1;
+        top: 87%;
+        padding: 6px;
+        background-color: transparent;
+        margin-top: 5px;
+        right: 25%;
+    }
+    .wishlist i{
+        color: #ccc;
         font-size: 20px;
     }
-
     .empty-cart img {
         width: 60%;
     }

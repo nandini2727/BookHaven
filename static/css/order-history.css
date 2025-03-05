@@ -128,18 +128,19 @@
   
     .order-header h5 {
       font-size: 18px;
-      margin-left: 10px;
+      margin: 0 10px ;
+      display: inline;
     }
   
     .order-header p {
       font-size: 14px;
+      
       margin-left: 10px;
     }
   
     .product {
-      flex-direction: column;
-      align-items: flex-start;
       text-align: left;
+      gap: 20px;
     }
   
     .product img {
@@ -155,22 +156,25 @@
   
     .product-info h4 {
       font-size: 1em;
+      text-align: left;
     }
   
     .product-info h3 {
       font-size: 14px;
+      text-align: left;
     }
-  
+    .product-info p{
+      text-align: left;
+    }
     .actions {
-      flex-direction: column;
       gap: 5px;
       align-items: center;
     }
   
     .actions a {
-      width: 100%;
+      width: 40%;
       font-size: 14px;
-      padding: 8px;
+      padding: 5px;
       text-align: center;
     }
   

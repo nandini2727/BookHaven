@@ -250,8 +250,9 @@
     }
 
     .img-contact {
-        width: 100%;
-        margin: 20px auto;
+        /* width: 100%;
+        margin: 20px auto; */
+        display: none;
     }
 
     .contact-form-container {

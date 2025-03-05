@@ -40,8 +40,7 @@ label {
     color: #555;
 }
 
-input[type="text"],
-input[type="password"] {
+.input-field{
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
@@ -49,8 +48,7 @@ input[type="password"] {
     outline: none;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
+.input-field:focus {
     border-color:#1fb124;
 }
 
@@ -101,15 +99,14 @@ a:hover {
 
 @media (max-width: 400px) {
     .login-container {
-        flex-direction: column;
-        gap: 40px;
-        padding: 20px;
+        flex-direction: column-reverse;
+        gap: 0px;
     }
 
     .login-box {
-        width: 90%;
-        margin: 40px auto;
-        padding: 15px;
+        width: 80%;
+        margin: 40px 0 0;
+        padding: 0;
     }
 
     h2 {

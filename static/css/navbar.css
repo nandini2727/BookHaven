@@ -176,6 +176,39 @@
   .nav-icons span {
     font-size: smaller;
   }
+  .sub-menu-wrap {
+    width: 70%;
+    right: 0;
+}
+.sub-menu {
+  background-color: #fefefe;
+  /* box-shadow: inset 0 0 30px rgba(108, 206, 22, 0.312); */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid green;
+  padding: 15px;
+  margin: 10px;
+}
+.user-dialog p, .user-dialog h3 {
+  padding: 5px;
+  padding-top: 0px;
+  font-size:0.9em;
+}
+
+.user-dialog h3 {
+  font-size: 1.1em;
+}
+.sub-menu hr {
+  margin: 5px 0 10px;
+}
+.sub-menu-wrap a {
+  padding: 8px 10px;
+}
+.sub-menu-link{
+  margin:8px 0;
+}
+.sub-menu-link i {
+  padding: 15px;
+}
    .hamburger {
     display: inline-block;
     cursor: pointer;

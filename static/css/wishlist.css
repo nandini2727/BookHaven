@@ -21,7 +21,9 @@ h1{
     color: #666;
     margin: 20px ;
 }
-
+.wishlist-table{
+    overflow: scroll;
+}
 table {
     width: 100%;
     border-collapse: collapse;
@@ -152,6 +154,7 @@ img {
 
     table {
         font-size: 12px;
+        width: 720px;
     }
 
     thead th {

@@ -781,12 +781,13 @@ button:hover {
     .newArr-category {
         width: 90%;
     }
-    .wishlist{
-        opacity:1;
+        .wishlist {
+        opacity: 1;
         top: 90%;
         padding: 6px;
         background-color: white;
         margin-top: 5px;
+        right: 70%;
     }
     .wishlist i{
         color: #bbb;

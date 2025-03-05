@@ -20,14 +20,15 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total</th>
-                    <th>Actions</th>
+                    <th class="remove">Actions</th>
                 </tr>
             </thead>
             
             <tbody id="cart-table-body">
                 {% for item in cart.items.all %}
                 <tr>
-                    <td><a href={% url "product" item.book.id %}><img src="{{ item.book.cover_image }}" alt="{{ item.book.title }}" style="width: 60px; height: auto;"></a></td>
+                    <td><a href={% url "product" item.book.id %}><img src="{{ item.book.cover_image }}" alt="{{ item.book.title }}" ></a>
+                        <span class="delete-span"><a href="{% url 'remove_from_cart' item.book.id %}">x</a></span></td>
                     <td><a href={% url "product" item.book.id %}>{{ item.book.title }}</a></td>
                     <td class="price">₹{{ item.book.price }}</td>
                     <td class="quantity">
@@ -39,7 +40,7 @@
                         </form>
                     </td>
                     <td class="total">₹{{ item.total_price }}</td>
-                    <td>
+                    <td class="remove">
                         <form method="post" action="{% url 'remove_from_cart' item.book.id %}">
                             {% csrf_token %}    
                             <button class="delete"><i class="fa-solid fa-trash"></i></button>
